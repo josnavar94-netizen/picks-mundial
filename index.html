@@ -161,6 +161,7 @@ footer{border-top:1px solid var(--b);padding:20px;text-align:center;font-size:11
       <button class="active" id="fmt-dec" onclick="setFmt('decimal',this)" style="height:28px;padding:0 12px;font-size:12px;border-radius:20px;background:var(--adim);border-color:var(--abr);color:var(--am);">Decimal (1.91)</button>
       <button id="fmt-am" onclick="setFmt('american',this)" style="height:28px;padding:0 12px;font-size:12px;border-radius:20px;">Americano (-110)</button>
     </div>
+
     <div class="g3">
       <div class="fg"><label id="l1">Iraq (1)</label><input type="number" id="oh" placeholder="ej. 3.80" step="0.01"/></div>
       <div class="fg"><label>Empate (X)</label><input type="number" id="od" placeholder="ej. 3.50" step="0.01"/></div>
@@ -171,6 +172,24 @@ footer{border-top:1px solid var(--b);padding:20px;text-align:center;font-size:11
       <div class="fg"><label>Under 2.5</label><input type="number" id="ou" placeholder="ej. 1.80" step="0.01"/></div>
       <div class="fg"><label>BTTS (Sí)</label><input type="number" id="ob" placeholder="ej. 1.95" step="0.01"/></div>
     </div>
+
+    <button type="button" onclick="toggleExtraMarkets()" id="extra-toggle" style="background:none;border:none;color:var(--bl);font-size:12px;cursor:pointer;padding:4px 0;margin-bottom:8px;display:flex;align-items:center;gap:4px;">
+      <span id="extra-arrow">▸</span> Más mercados (Doble Oportunidad, BTTS No, Apuesta no válida)
+    </button>
+    <div id="extra-markets" class="hidden">
+      <div class="g3" style="margin-bottom:8px;">
+        <div class="fg"><label>BTTS (No)</label><input type="number" id="obn" placeholder="ej. 1.41" step="0.01"/></div>
+        <div class="fg"><label id="lbl-dnbh">DNB: Gana Local</label><input type="number" id="odnbh" placeholder="ej. 1.06" step="0.01"/></div>
+        <div class="fg"><label id="lbl-dnba">DNB: Gana Visitante</label><input type="number" id="odnba" placeholder="ej. 19.50" step="0.01"/></div>
+      </div>
+      <div class="g3" style="margin-bottom:8px;">
+        <div class="fg"><label id="lbl-dc1x">DO: Local/Empate</label><input type="number" id="odc1x" placeholder="ej. 1.06" step="0.01"/></div>
+        <div class="fg"><label id="lbl-dcx2">DO: Empate/Visitante</label><input type="number" id="odcx2" placeholder="ej. 7.80" step="0.01"/></div>
+        <div class="fg"><label id="lbl-dc12">DO: Local/Visitante</label><input type="number" id="odc12" placeholder="ej. 1.06" step="0.01"/></div>
+      </div>
+      <div style="font-size:11px;color:var(--mu);margin-bottom:8px;">DNB = Empate Apuesta No Válida (Draw No Bet) · DO = Doble Oportunidad</div>
+    </div>
+
     <button class="btn-am" onclick="runCalc()" style="width:100%;margin-top:6px;">Calcular picks</button>
   </div>
 
@@ -184,20 +203,30 @@ footer{border-top:1px solid var(--b);padding:20px;text-align:center;font-size:11
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px;">
         <div class="fg">
           <label>Minuto</label>
-          <input type="number" id="live-min" placeholder="ej. 67" min="1" max="120" oninput="runCalc()" />
+          <input type="number" id="live-min" placeholder="ej. 67" min="1" max="120" value="45" />
         </div>
         <div class="fg">
           <label id="live-lbl-h">Goles local</label>
-          <input type="number" id="live-gh" value="0" min="0" max="20" oninput="runCalc()" />
+          <input type="number" id="live-gh" value="0" min="0" max="20" />
         </div>
         <div class="fg">
           <label id="live-lbl-a">Goles visitante</label>
-          <input type="number" id="live-ga" value="0" min="0" max="20" oninput="runCalc()" />
+          <input type="number" id="live-ga" value="0" min="0" max="20" />
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+        <div class="fg">
+          <label id="live-lbl-rh">🟥 Expulsados local</label>
+          <input type="number" id="live-rh" value="0" min="0" max="5" />
+        </div>
+        <div class="fg">
+          <label id="live-lbl-ra">🟥 Expulsados visitante</label>
+          <input type="number" id="live-ra" value="0" min="0" max="5" />
         </div>
       </div>
       <div style="background:var(--rdim);border:1px solid var(--rbr);border-radius:8px;padding:8px 12px;font-size:12px;color:var(--mu);display:flex;align-items:center;gap:8px;">
         <span style="color:var(--rd);font-size:14px;">⚡</span>
-        Modo en vivo: las probabilidades se recalculan con los xG <strong style="color:var(--tx);">restantes</strong> del partido y el marcador actual.
+        Modo en vivo: las probabilidades se recalculan con los xG <strong style="color:var(--tx);">restantes</strong> del partido, el marcador actual y las expulsiones.
       </div>
     </div>
   </div>
@@ -282,7 +311,7 @@ footer{border-top:1px solid var(--b);padding:20px;text-align:center;font-size:11
       <button onclick="exportMyBets()" style="height:30px;padding:0 12px;font-size:12px;border-radius:8px;border:1px solid var(--gbr);background:var(--gdim);color:var(--gn);cursor:pointer;display:inline-flex;align-items:center;gap:5px;">⬇ Exportar historial</button>
       <button onclick="document.getElementById('import-file').click()" style="height:30px;padding:0 12px;font-size:12px;border-radius:8px;border:1px solid var(--b2);background:var(--sur2);color:var(--tx);cursor:pointer;display:inline-flex;align-items:center;gap:5px;">⬆ Importar historial</button>
       <input type="file" id="import-file" accept=".json" style="display:none;" onchange="importMyBets(event)" />
-      <span style="font-size:11px;color:var(--mu);align-self:center;">💡 Exporta antes de actualizar el archivo, luego impórtalo aquí</span>
+      <span style="font-size:11px;color:var(--mu);align-self:center;">💡 Exporta antes de actualizar el archivo. Importar REEMPLAZA tu historial actual.</span>
     </div>
   </div>
 
@@ -331,7 +360,7 @@ footer{border-top:1px solid var(--b);padding:20px;text-align:center;font-size:11
   </div>
 
   <div id="my-historial" class="hidden">
-    <canvas id="my-chart" height="80" style="margin-bottom:1rem;display:none;"></canvas>
+    <div id="my-chart-wrap" style="margin-bottom:1rem;display:none;background:var(--sur2);border:1px solid var(--b);border-radius:10px;padding:10px;"></div>
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;align-items:center;">
       <button onclick="setMyFilter('all',this)" style="height:28px;padding:0 12px;font-size:12px;border-radius:20px;" id="mf-all">Todos</button>
       <button onclick="setMyFilter('won',this)" style="height:28px;padding:0 12px;font-size:12px;border-radius:20px;" id="mf-won">Ganadas</button>
@@ -346,7 +375,6 @@ footer{border-top:1px solid var(--b);padding:20px;text-align:center;font-size:11
 
 <footer>© 2026 PicksMundial · Datos: martj42/international_results + openfootball/worldcup.json · Solo informativo · +18</footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <script>
 
 // ═══ DATOS REALES ═══
@@ -666,7 +694,19 @@ function onFC(){
     document.getElementById('la').textContent=m.a+' (2)';
     document.getElementById('l1').textContent=m.h+' (1)';
     document.getElementById('l2').textContent=m.a+' (2)';
+    const ldnbh=document.getElementById('lbl-dnbh'); if(ldnbh)ldnbh.textContent='DNB: Gana '+m.h;
+    const ldnba=document.getElementById('lbl-dnba'); if(ldnba)ldnba.textContent='DNB: Gana '+m.a;
+    const ldc1x=document.getElementById('lbl-dc1x'); if(ldc1x)ldc1x.textContent='DO: '+m.h+'/Empate';
+    const ldcx2=document.getElementById('lbl-dcx2'); if(ldcx2)ldcx2.textContent='DO: Empate/'+m.a;
+    const ldc12=document.getElementById('lbl-dc12'); if(ldc12)ldc12.textContent='DO: '+m.h+'/'+m.a;
+    ['obn','odnbh','odnba','odc1x','odcx2','odc12'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+    const llh=document.getElementById('live-lbl-h'); if(llh)llh.textContent='Goles '+m.h;
+    const lla=document.getElementById('live-lbl-a'); if(lla)lla.textContent='Goles '+m.a;
+    const lrh=document.getElementById('live-lbl-rh'); if(lrh)lrh.textContent='🟥 Expulsados '+m.h;
+    const lra=document.getElementById('live-lbl-ra'); if(lra)lra.textContent='🟥 Expulsados '+m.a;
     ['oh','od','oa','oo','ou','ob'].forEach(id=>document.getElementById(id).value='');
+    const lrhI=document.getElementById('live-rh'); if(lrhI)lrhI.value='0';
+    const lraI=document.getElementById('live-ra'); if(lraI)lraI.value='0';
     document.getElementById('res').classList.add('hidden');
     // Reset live mode when changing fixture
     const lt=document.getElementById('live-toggle');
@@ -689,6 +729,14 @@ function setRT(t,el){
   document.getElementById('tsec').classList.toggle('hidden',t!=='sec');
 }
 
+function toggleExtraMarkets(){
+  const el=document.getElementById('extra-markets');
+  const arrow=document.getElementById('extra-arrow');
+  const isHidden=el.classList.contains('hidden');
+  el.classList.toggle('hidden');
+  arrow.textContent=isHidden?'▾':'▸';
+}
+
 function toD(v){
   if(!v||v===''||isNaN(v))return null;
   v=parseFloat(v);
@@ -707,7 +755,8 @@ function toggleLive(){
   document.getElementById('live-fields').classList.toggle('hidden', !on);
   const lbl = document.getElementById('live-card').querySelector('label[for="live-toggle"]');
   lbl.style.color = on ? 'var(--rd)' : 'var(--mu)';
-  if(on) runCalc();
+  // No auto-calc here — evita confusión. El usuario calcula explícitamente con el botón
+  // o al editar minuto/marcador (que sí dispara runCalc() vía oninput).
 }
 
 function isLive(){
@@ -718,7 +767,9 @@ function getLiveState(){
   const min = parseInt(document.getElementById('live-min').value) || 0;
   const gh  = parseInt(document.getElementById('live-gh').value)  || 0;
   const ga  = parseInt(document.getElementById('live-ga').value)  || 0;
-  return {min, gh, ga};
+  const rh  = parseInt(document.getElementById('live-rh').value)  || 0;
+  const ra  = parseInt(document.getElementById('live-ra').value)  || 0;
+  return {min, gh, ga, rh, ra};
 }
 
 function remainingXG(xgFull, minute){
@@ -726,9 +777,26 @@ function remainingXG(xgFull, minute){
   return xgFull * rem;
 }
 
-function inPlayProbs(xgH, xgA, min, scoreH, scoreA){
-  const xgHR = remainingXG(xgH, min);
-  const xgAR = remainingXG(xgA, min);
+// Factores de impacto por expulsión (calibrado con literatura de fútbol: un jugador
+// menos reduce ~25-30% el ataque propio y aumenta ~20-25% lo que concede el equipo)
+const RED_CARD_ATT_PENALTY = 0.27; // reducción de ataque por cada expulsado
+const RED_CARD_DEF_PENALTY = 0.22; // aumento de vulnerabilidad defensiva por cada expulsado
+
+function applyRedCards(xgFor, xgAgainst, ownReds, oppReds){
+  // El propio equipo con expulsados: ataca menos
+  let xgForAdj = xgFor * Math.max(0.15, 1 - RED_CARD_ATT_PENALTY * ownReds);
+  // El rival con expulsados favorece que ESTE equipo le anote más (rival defiende peor)
+  xgForAdj = xgForAdj * (1 + RED_CARD_DEF_PENALTY * oppReds);
+  return Math.max(0.05, xgForAdj);
+}
+
+function inPlayProbs(xgH, xgA, min, scoreH, scoreA, redH, redA){
+  redH = redH || 0; redA = redA || 0;
+  let xgHR = remainingXG(xgH, min);
+  let xgAR = remainingXG(xgA, min);
+  // Aplicar impacto de expulsiones sobre el xG restante
+  xgHR = applyRedCards(xgHR, xgAR, redH, redA);
+  xgAR = applyRedCards(xgAR, xgHR, redA, redH);
   const poi=(l,k)=>{let p=Math.exp(-l);for(let i=0;i<k;i++)p*=l/(i+1);return p;};
   let pH=0,pD=0,pA=0,pO=0,pB=0;
   for(let i=0;i<=10;i++)for(let j=0;j<=10;j++){
@@ -737,13 +805,12 @@ function inPlayProbs(xgH, xgA, min, scoreH, scoreA){
     if(tH>tA) pH+=p; else if(tH===tA) pD+=p; else pA+=p;
     if(tH+tA>2.5) pO+=p;
     if(tH>0&&tA>0) pB+=p;
-    // already over 2.5?
   }
   // If already over 2.5 goals in current score, over is 100%
   if(scoreH+scoreA>2) pO=1;
   // BTTS already?
   if(scoreH>0&&scoreA>0) pB=1;
-  return {home:pH,draw:pD,away:pA,over25:pO,under25:1-pO,btts:pB,xgHR,xgAR};
+  return {home:pH,draw:pD,away:pA,over25:pO,under25:1-pO,btts:pB,xgHR,xgAR,redH,redA};
 }
 
 let currentMarkets=[];
@@ -858,14 +925,24 @@ function runCalc(){
     over25:toD(document.getElementById('oo').value),
     under25:toD(document.getElementById('ou').value),
     btts:toD(document.getElementById('ob').value),
+    bttsNo:toD(document.getElementById('obn')?.value),
+    dc1x:toD(document.getElementById('odc1x')?.value),
+    dcx2:toD(document.getElementById('odcx2')?.value),
+    dc12:toD(document.getElementById('odc12')?.value),
+    dnbHome:toD(document.getElementById('odnbh')?.value),
+    dnbAway:toD(document.getElementById('odnba')?.value),
   };
   const pFull=modelProbs(home,away,neutral);
   const mH=MODEL[home],mA=MODEL[away];
   const wcH=WC_REAL[home],wcA=WC_REAL[away];
   const hd=getH2H(home,away);
   const live=isLive();
-  const lv=live?getLiveState():{min:0,gh:0,ga:0};
-  const p=live ? inPlayProbs(pFull.xgH,pFull.xgA,lv.min,lv.gh,lv.ga) : pFull;
+  const lv=live?getLiveState():{min:0,gh:0,ga:0,rh:0,ra:0};
+  const p=live ? inPlayProbs(pFull.xgH,pFull.xgA,lv.min,lv.gh,lv.ga,lv.rh,lv.ra) : pFull;
+  if(live){
+    p.eloH=pFull.eloH; p.eloA=pFull.eloA;
+    p.xgH=p.xgHR; p.xgA=p.xgAR; // alias para que el resto del código (teamBox, etc.) siempre tenga xgH/xgA
+  }
 
   // H2H box
   const h2hbox=document.getElementById('h2hbox');
@@ -889,9 +966,14 @@ function runCalc(){
     document.getElementById('xvh').textContent=p.xgHR.toFixed(2);
     document.getElementById('xva').textContent=p.xgAR.toFixed(2);
     const timeRem=Math.max(0,90-lv.min);
+    const calcTime=new Date().toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    const redTxt=(lv.rh>0||lv.ra>0)
+      ?' · 🟥 '+(lv.rh>0?home+' ('+lv.rh+')':'')+(lv.rh>0&&lv.ra>0?' · ':'')+(lv.ra>0?away+' ('+lv.ra+')':'')
+      :'';
     document.getElementById('slbl').innerHTML=
       '<span style="color:var(--rd);font-weight:600;">⚡ EN VIVO</span> '
-      +'Min '+lv.min+' · '+lv.gh+'-'+lv.ga+' · '+timeRem+'min restantes';
+      +'Min '+lv.min+' · '+lv.gh+'-'+lv.ga+' · '+timeRem+'min restantes'+redTxt
+      +' <span style="color:var(--mu2);">(calculado '+calcTime+')</span>';
     // Update live labels
     const lh=document.getElementById('live-lbl-h');
     const la=document.getElementById('live-lbl-a');
@@ -930,7 +1012,7 @@ function runCalc(){
     box+='<div style="font-size:11px;color:var(--mu);">Ataque (GF/pj adj): '+att+'</div>';
     box+='<div style="font-size:11px;color:var(--mu);">Defensa (GA/pj adj): '+def+'</div>';
     box+='<div style="font-size:11px;color:var(--mu);">Win rate hist: '+wr+'</div>';
-    box+='<div style="font-size:12px;font-weight:500;color:var(--bl);margin-top:6px;">xG esperados: '+xgFin.toFixed(2)+'</div>';
+    box+='<div style="font-size:12px;font-weight:500;color:var(--bl);margin-top:6px;">xG esperados: '+(typeof xgFin==='number'?xgFin.toFixed(2):'—')+'</div>';
     box+='</div>';
     return box;
   }
@@ -945,8 +1027,23 @@ function runCalc(){
   expl+='<div style="border-top:0.5px solid var(--b);padding-top:8px;color:var(--mu);">';
   expl+='<div><strong style="color:var(--tx);">Modelo:</strong> Poisson (50%) + ELO directo (50%). Favorito ELO: <strong style="color:var(--bl);">'+eloFav+'</strong> ('+p.eloH+' vs '+p.eloA+')</div>';
   expl+='<div><strong style="color:var(--tx);">Ajuste H2H:</strong> '+h2hExpl+'</div>';
+  if(live&&(lv.rh>0||lv.ra>0)){
+    const redParts=[];
+    if(lv.rh>0)redParts.push(home+': -'+lv.rh+' jugador'+(lv.rh>1?'es':''));
+    if(lv.ra>0)redParts.push(away+': -'+lv.ra+' jugador'+(lv.ra>1?'es':''));
+    expl+='<div style="color:var(--rd);margin-top:4px;">🟥 <strong style="color:var(--rd);">Expulsiones activas:</strong> '+redParts.join(' · ')+'. xG ajustado: ataque propio reducido, vulnerabilidad defensiva aumentada.</div>';
+  }
   expl+='</div></div>';
   document.getElementById('explanation').innerHTML=expl;
+
+  // Mercados derivados matemáticamente de home/draw/away/over/under/btts
+  const dcHomeDraw = p.home + p.draw;       // Doble oportunidad: Local o Empate
+  const dcAwayDraw = p.away + p.draw;       // Doble oportunidad: Visitante o Empate
+  const dcHomeAway = p.home + p.away;       // Doble oportunidad: Local o Visitante
+  const bttsNo = 1 - p.btts;                // Ambos anotan: No
+  // Empate Apuesta No Válida (Draw No Bet): se anula el empate, se reparte proporcional
+  const dnbHome = p.home / (p.home + p.away || 1);
+  const dnbAway = p.away / (p.home + p.away || 1);
 
   const mkts=[
     {label:'Gana '+home+' (1)',modelP:p.home,odd:odds.home},
@@ -955,6 +1052,12 @@ function runCalc(){
     {label:'Over 2.5 goles',modelP:p.over25,odd:odds.over25},
     {label:'Under 2.5 goles',modelP:p.under25,odd:odds.under25},
     {label:'Ambos anotan (Sí)',modelP:p.btts,odd:odds.btts},
+    {label:'Ambos anotan (No)',modelP:bttsNo,odd:odds.bttsNo},
+    {label:'Doble oportunidad: '+home+' o Empate',modelP:dcHomeDraw,odd:odds.dc1x},
+    {label:'Doble oportunidad: '+away+' o Empate',modelP:dcAwayDraw,odd:odds.dcx2},
+    {label:'Doble oportunidad: '+home+' o '+away,modelP:dcHomeAway,odd:odds.dc12},
+    {label:'Apuesta no válida: Gana '+home,modelP:dnbHome,odd:odds.dnbHome},
+    {label:'Apuesta no válida: Gana '+away,modelP:dnbAway,odd:odds.dnbAway},
   ];
   let bestEV=-99;
   let mtb='';
@@ -1103,21 +1206,15 @@ function importMyBets(event){
   reader.onload=function(e){
     try{
       const imported=JSON.parse(e.target.result);
-      if(!Array.isArray(imported)){alert('Archivo inválido.');return;}
-      const existingIds=new Set(myBets.map(b=>b.id));
-      let added=0,skipped=0;
-      imported.forEach(b=>{
-        if(!existingIds.has(b.id)){
-          myBets.push(b);
-          added++;
-        } else {
-          skipped++;
-        }
-      });
-      myBets.sort((a,b)=>b.id-a.id);
+      if(!Array.isArray(imported)){alert('Archivo inválido.');event.target.value='';return;}
+      const currentCount=myBets.length;
+      const newCount=imported.length;
+      const confirmMsg='Esto va a REEMPLAZAR tu historial actual ('+currentCount+' apuesta'+(currentCount!==1?'s':'')+') con el contenido del archivo ('+newCount+' apuesta'+(newCount!==1?'s':'')+').\n\nEsta acción no se puede deshacer. ¿Continuar?';
+      if(!confirm(confirmMsg)){event.target.value='';return;}
+      myBets=imported.slice().sort((a,b)=>b.id-a.id);
       mySave();
       myRender();
-      alert('Importadas: '+added+' apuestas nuevas'+(skipped>0?' · '+skipped+' ya existían (omitidas)':''));
+      alert('✓ Historial reemplazado: ahora tienes '+myBets.length+' apuesta'+(myBets.length!==1?'s':'')+'.');
     }catch(err){
       alert('Error al leer el archivo: '+err.message);
     }
@@ -1213,16 +1310,31 @@ function myRender(){
 
 function myRenderChart(){
   const closed=myBets.filter(b=>b.result!=='open').slice().reverse();
-  const canvas=document.getElementById('my-chart');
-  if(!canvas)return;
-  if(closed.length<2){canvas.style.display='none';return;}
-  canvas.style.display='block';
+  const wrap=document.getElementById('my-chart-wrap');
+  if(!wrap)return;
+  if(closed.length<2){wrap.innerHTML='';wrap.style.display='none';return;}
+  wrap.style.display='block';
   let cum=0;
   const data=closed.map(b=>{cum+=b.pl;return parseFloat(cum.toFixed(3));});
-  const colors=data.map(v=>v>=0?'rgba(34,197,94,0.65)':'rgba(239,68,68,0.65)');
-  if(typeof Chart==='undefined')return;
-  if(myChartInst)myChartInst.destroy();
-  myChartInst=new Chart(canvas,{type:'bar',data:{labels:data.map((_,i)=>i+1),datasets:[{data,backgroundColor:colors,borderRadius:3,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{display:false},y:{grid:{color:'rgba(128,128,128,0.1)'},ticks:{font:{size:11},color:'#888',callback:v=>v+'u'}}}}});
+  const maxAbs=Math.max(...data.map(v=>Math.abs(v)),1);
+  let h='<div style="display:flex;align-items:center;gap:2px;height:90px;padding:0 4px;">';
+  data.forEach((v,i)=>{
+    const pct=Math.max(4,Math.abs(v)/maxAbs*45);
+    const isPos=v>=0;
+    h+='<div style="flex:1;min-width:6px;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;" title="P&L acum: '+(v>=0?'+':'')+v.toFixed(2)+'u">';
+    h+='<div style="height:50%;display:flex;flex-direction:column-reverse;width:100%;align-items:center;">';
+    h+=isPos?'<div style="width:80%;height:'+pct+'%;background:rgba(34,197,94,0.65);border-radius:2px 2px 0 0;"></div>':'';
+    h+='</div>';
+    h+='<div style="height:50%;display:flex;flex-direction:column;width:100%;align-items:center;">';
+    h+=!isPos?'<div style="width:80%;height:'+pct+'%;background:rgba(239,68,68,0.65);border-radius:0 0 2px 2px;"></div>':'';
+    h+='</div>';
+    h+='</div>';
+  });
+  h+='</div>';
+  h+='<div style="display:flex;justify-content:space-between;font-size:10px;color:var(--mu);padding:4px 4px 0;border-top:1px solid var(--b);margin-top:4px;">';
+  h+='<span>Pick 1</span><span>P&L acumulado · '+data.length+' picks cerrados</span><span>Pick '+data.length+'</span>';
+  h+='</div>';
+  wrap.innerHTML=h;
 }
 
 // ═══ NAVEGACIÓN ═══
