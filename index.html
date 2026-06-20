@@ -3,88 +3,255 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>PicksMundial 2026</title>
+<title>GuessBet · Mundial 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
 <style>
-:root{--bg:#0a0e1a;--sur:#111827;--sur2:#1a2235;--b:rgba(255,255,255,.07);--b2:rgba(255,255,255,.13);--tx:#eef2ff;--mu:#6b7fa3;--mu2:#3d506e;--gn:#22c55e;--gdim:rgba(34,197,94,.1);--gbr:rgba(34,197,94,.28);--am:#f59e0b;--adim:rgba(245,158,11,.1);--abr:rgba(245,158,11,.3);--rd:#ef4444;--rdim:rgba(239,68,68,.1);--rbr:rgba(239,68,68,.22);--bl:#3b82f6;--bdim:rgba(59,130,246,.1);}
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
+:root{
+  --bg:#0a1410;--sur:#0f1f18;--sur2:#16291f;--sur3:#1d3326;
+  --b:rgba(212,164,67,.10);--b2:rgba(212,164,67,.20);
+  --tx:#f4f1e8;--mu:#8fa898;--mu2:#5a7268;
+  --gn:#3fae6c;--gdim:rgba(63,174,108,.13);--gbr:rgba(63,174,108,.30);
+  --am:#d4a443;--adim:rgba(212,164,67,.12);--abr:rgba(212,164,67,.32);
+  --rd:#d9594c;--rdim:rgba(217,89,76,.12);--rbr:rgba(217,89,76,.26);
+  --bl:#5b9bd9;--bdim:rgba(91,155,217,.12);
+  --pitch-line:rgba(244,241,232,.045);
+}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--tx);font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;min-height:100vh;}
-h1,h2,h3{font-family:'Space Grotesk',sans-serif;}
-nav{background:var(--sur);border-bottom:1px solid var(--b);position:sticky;top:0;z-index:100;}
-.ni{max-width:980px;margin:0 auto;padding:0 1.25rem;display:flex;align-items:center;}
-.logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:var(--am);padding:14px 0;margin-right:24px;}
+html,body{background:var(--bg);color:var(--tx);font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;min-height:100vh;}
+body{
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 119px, var(--pitch-line) 119px, var(--pitch-line) 120px),
+    radial-gradient(ellipse 900px 500px at 50% -10%, rgba(212,164,67,.06), transparent 60%);
+  background-attachment:fixed;
+}
+h1,h2,h3{font-family:'Bebas Neue',sans-serif;letter-spacing:.02em;font-weight:400;}
+a{color:inherit;text-decoration:none;}
+::selection{background:var(--am);color:var(--bg);}
+
+/* NAV */
+nav{background:linear-gradient(180deg,var(--sur),rgba(15,31,24,.94));border-bottom:1px solid var(--b2);position:sticky;top:0;z-index:100;backdrop-filter:blur(8px);}
+.ni{max-width:1000px;margin:0 auto;padding:0 1.25rem;display:flex;align-items:center;}
+.logo{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:22px;letter-spacing:.04em;color:var(--am);padding:13px 0;margin-right:30px;display:flex;align-items:center;gap:6px;}
 .logo span{color:var(--tx);}
-.nl{padding:14px 14px;font-size:13px;color:var(--mu);cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;font-family:'Inter',sans-serif;white-space:nowrap;margin-bottom:-1px;transition:color .15s;}
+.nl{padding:14px 14px;font-size:13px;font-weight:500;color:var(--mu);cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;font-family:'Inter',sans-serif;white-space:nowrap;margin-bottom:-1px;transition:color .15s;}
 .nl:hover{color:var(--tx);}
 .nl.active{color:var(--am);border-bottom-color:var(--am);}
+.nl:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--am);outline-offset:2px;}
+
 .page{display:none;}.page.active{display:block;}
-.wrap{max-width:980px;margin:0 auto;padding:2rem 1.25rem 5rem;}
-input[type=text],input[type=number],input[type=date],select{width:100%;background:var(--sur2);border:1px solid var(--b2);color:var(--tx);font-family:'Inter',sans-serif;font-size:13px;padding:0 10px;height:38px;border-radius:7px;}
-input:focus,select:focus{outline:none;border-color:var(--am);}
-optgroup{color:var(--am);}option{background:var(--sur);color:var(--tx);}
-button{height:34px;padding:0 14px;border:0.5px solid var(--b2);border-radius:7px;background:transparent;color:var(--tx);font-size:13px;font-family:'Inter',sans-serif;cursor:pointer;display:inline-flex;align-items:center;gap:5px;}
-button:hover{background:var(--sur2);}
-.btn-am{height:40px;padding:0 20px;background:var(--am);color:#0a0e1a;border:none;border-radius:8px;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;cursor:pointer;}
-.btn-am:hover{opacity:.88;}
-.card{background:var(--sur);border:0.5px solid var(--b);border-radius:10px;padding:1.1rem 1.25rem;margin-bottom:1rem;}
-.sec{font-size:11px;font-weight:600;color:var(--mu);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;}
-.fg label{font-size:11px;color:var(--mu);display:block;margin-bottom:4px;}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px;}
-.sb{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-bottom:1.5rem;}
-.sbl{background:var(--sur);padding:12px 14px;}
-.sbl .sl{font-size:11px;color:var(--mu);margin-bottom:3px;}
-.sbl .sv{font-size:20px;font-weight:500;font-family:'Space Grotesk',sans-serif;}
-.tabs{display:flex;gap:0;border-bottom:1px solid var(--b);margin-bottom:1.5rem;}
-.tab{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--mu);font-family:'Inter',sans-serif;font-size:13px;padding:7px 16px 11px;cursor:pointer;margin-bottom:-1px;white-space:nowrap;}
-.tab.active{color:var(--am);border-bottom-color:var(--am);}
-.fsel{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7fa3' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;}
-.mt{width:100%;border-collapse:collapse;}
-.mt th{font-size:10px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.08em;text-align:left;padding:7px 10px;border-bottom:1px solid var(--b);}
-.mt td{padding:9px 10px;border-bottom:1px solid var(--b);font-size:13px;vertical-align:middle;}
-.mt tr:last-child td{border-bottom:none;}
-.mt tr:hover td{background:rgba(255,255,255,.012);}
-.ep{color:var(--gn);font-weight:600;}.en{color:var(--rd);}.eu{color:var(--mu);}
-.fo{font-family:'Space Grotesk',sans-serif;color:var(--bl);}
-.py{display:inline-block;background:var(--gdim);border:1px solid var(--gbr);color:var(--gn);font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;}
-.ps{display:inline-block;background:var(--rdim);border:1px solid var(--rbr);color:#f87171;font-size:10px;padding:2px 7px;border-radius:20px;}
-.xg-strip{background:var(--sur2);border:1px solid var(--b);border-radius:10px;padding:14px 18px;margin-bottom:10px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
-.xgt .xn{font-size:11px;color:var(--mu);}.xgt .xv{font-size:24px;font-weight:500;font-family:'Space Grotesk',sans-serif;}
-.edge-bar{padding:8px 12px;border-left:3px solid var(--am);background:var(--adim);border-radius:0 6px 6px 0;font-size:12px;color:var(--mu);margin-bottom:1rem;}
-.h2h-box{background:var(--sur2);border:1px solid rgba(167,139,250,.25);border-radius:10px;padding:12px 14px;margin-bottom:1rem;}
-.h2h-title{font-size:11px;font-weight:600;color:#a78bfa;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;}
-.h2h-row{display:flex;gap:8px;flex-wrap:wrap;}
-.h2h-s{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2);border-radius:6px;padding:5px 10px;text-align:center;}
-.h2h-s .hl{font-size:10px;color:var(--mu);}.h2h-s .hv{font-size:15px;font-weight:500;color:#a78bfa;font-family:'Space Grotesk',sans-serif;}
-.cc{background:var(--sur);border:0.5px solid var(--b);border-radius:12px;padding:1.1rem;margin-bottom:1rem;}
-.ccb{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;display:inline-block;color:var(--gn);border:1px solid var(--gbr);}
-.ccp{font-size:11px;color:var(--mu);margin-top:4px;}
-.cco{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;color:var(--am);margin:8px 0 4px;}
-.ccl{border-top:1px solid var(--b);padding-top:10px;margin-top:6px;}
-.cleg{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid var(--b);}
+.wrap{max-width:1000px;margin:0 auto;padding:2rem 1.25rem 5rem;}
+
+/* hero */
+.hero{margin-bottom:1.75rem;}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.14em;color:var(--am);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.dot{width:6px;height:6px;background:var(--gn);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+.hero h1{font-size:42px;line-height:1;margin-bottom:8px;}
+.hero h1 span{color:var(--am);}
+.hero p{font-size:13.5px;color:var(--mu);max-width:540px;line-height:1.7;}
+.source-badge{display:inline-flex;align-items:center;gap:6px;background:var(--bdim);border:1px solid rgba(91,155,217,.25);border-radius:20px;padding:5px 13px;font-size:11px;color:var(--bl);margin-top:12px;}
+.counters{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+.counter{background:var(--sur2);border:1px solid var(--b2);border-radius:10px;padding:12px 18px;text-align:center;min-width:96px;position:relative;}
+.counter .cv{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.02em;}
+.counter .cl{font-size:10.5px;color:var(--mu);text-transform:uppercase;letter-spacing:.04em;margin-top:1px;}
+
+/* top picks strip */
+.strip{background:var(--sur);border:1px solid var(--b2);border-radius:14px;padding:1.2rem 1.3rem;margin-bottom:1.5rem;position:relative;overflow:hidden;}
+.strip::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--am),transparent 70%);}
+.stlbl{font-size:11px;font-weight:700;color:var(--mu);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.tpr{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--b);}
+.tpr:last-child{border-bottom:none;}
+.tpr-m{flex:1;min-width:0;}.tpr-m .mn{font-size:13.5px;font-weight:600;}.tpr-m .ms{font-size:11px;color:var(--mu);}
+.tpr-p{font-size:12px;color:var(--mu);flex-shrink:0;}
+.tpr-r{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.op{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--bl);}
+.ep{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;}
+.ehi{background:var(--gdim);border:1px solid var(--gbr);color:var(--gn);}
+.emi{background:var(--adim);border:1px solid var(--abr);color:var(--am);}
+
+/* two col */
+.tc{display:grid;grid-template-columns:1fr 320px;gap:1.5rem;align-items:start;}
+.sec-title{font-size:11px;font-weight:700;color:var(--mu);letter-spacing:.1em;text-transform:uppercase;margin-bottom:13px;display:flex;align-items:center;gap:7px;}
+
+/* match ticket card */
+.dg{margin-bottom:1.6rem;}
+.dlbl{font-size:11.5px;font-weight:600;color:var(--am);padding:6px 0;border-bottom:1px dashed var(--b2);margin-bottom:9px;letter-spacing:.03em;}
+.mc{background:var(--sur);border:1px solid var(--b);border-radius:12px;padding:14px 16px;margin-bottom:9px;position:relative;transition:border-color .15s, transform .12s;}
+.mc:hover{border-color:var(--b2);transform:translateY(-1px);}
+.mc.hp{border-left:3px solid var(--am);}
+.mc.pl{opacity:.55;}
+.mch{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.mct{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;}
+.mfl{font-size:22px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5));}
+.mvs{font-size:11px;color:var(--mu);margin:0 3px;font-weight:500;}
+.msc{font-family:'Bebas Neue',sans-serif;font-size:17px;color:var(--am);background:var(--adim);border:1px solid var(--abr);padding:3px 10px;border-radius:6px;}
+.mti{font-size:11px;color:var(--mu);font-weight:500;}
+.mcp{display:flex;align-items:center;gap:9px;flex-wrap:wrap;}
+.pkl{font-size:12px;color:var(--mu);}.pkv{font-size:12px;font-weight:600;}
+.nopk{font-size:12px;color:var(--mu2);font-style:italic;}
+.dtag{font-size:10px;color:var(--bl);background:var(--bdim);border:1px solid rgba(91,155,217,.2);padding:2px 7px;border-radius:10px;}
+
+/* combinadas */
+.cc{background:var(--sur);border:1px solid var(--b);border-radius:12px;padding:1.15rem;margin-bottom:1rem;}
+.ccb{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;display:inline-block;color:var(--gn);border:1px solid var(--gbr);letter-spacing:.03em;}
+.ccp{font-size:11px;color:var(--mu);margin-top:5px;}
+.cco{font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--am);margin:9px 0 5px;}
+.ccl{border-top:1px solid var(--b);padding-top:11px;margin-top:7px;}
+.cleg{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid var(--b);}
 .cleg:last-child{border-bottom:none;}
-.leg-n{font-size:10px;color:var(--mu);width:24px;flex-shrink:0;padding-top:2px;}
+.leg-n{font-size:10px;color:var(--mu);width:26px;flex-shrink:0;padding-top:2px;font-weight:600;}
 .lc{flex:1;min-width:0;}
-.lm{font-size:12px;font-weight:500;}
-.lp{font-size:11px;color:var(--mu);margin-top:1px;}
-.leg-o{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--bl);flex-shrink:0;}
-.ccf{display:flex;gap:16px;margin-top:10px;border-top:1px solid var(--b);padding-top:10px;}
+.lm{font-size:12.5px;font-weight:600;}
+.lp{font-size:11px;color:var(--mu);margin-top:2px;}
+.leg-o{font-family:'Bebas Neue',sans-serif;font-size:15px;color:var(--bl);flex-shrink:0;}
+.ccf{display:flex;gap:18px;margin-top:11px;border-top:1px solid var(--b);padding-top:11px;}
 .cs{flex:1;}
-.cs .cl{font-size:10px;color:var(--mu);}
-.cs .cv{font-size:14px;font-weight:500;margin-top:2px;}
+.cs .cl{font-size:10px;color:var(--mu);letter-spacing:.02em;}
+.cs .cv{font-size:15px;font-weight:600;margin-top:3px;}
+
+/* summary stat bar */
+.sb{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--b2);border:1px solid var(--b2);border-radius:14px;overflow:hidden;margin-bottom:1.5rem;}
+.sbl{background:var(--sur);padding:14px 16px;}
+.sbl .sl{font-size:10.5px;color:var(--mu);margin-bottom:4px;text-transform:uppercase;letter-spacing:.03em;}
+.sbl .sv{font-family:'Bebas Neue',sans-serif;font-size:24px;}
+
+/* cards */
+.card{background:var(--sur);border:1px solid var(--b);border-radius:14px;padding:1.3rem;margin-bottom:1rem;}
+.ctit{font-size:11px;font-weight:700;color:var(--mu);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.1rem;display:flex;align-items:center;gap:9px;}
+.ctit .n{width:21px;height:21px;border-radius:50%;background:var(--sur3);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--am);font-weight:700;flex-shrink:0;}
+
+input,select{
+  width:100%;background:var(--sur2);border:1px solid var(--b2);color:var(--tx);
+  font-family:'Inter',sans-serif;font-size:13px;padding:0 12px;height:40px;border-radius:9px;
+  transition:border-color .15s;
+}
+input:focus,select:focus{outline:none;border-color:var(--am);box-shadow:0 0 0 3px rgba(212,164,67,.12);}
+.fsel{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238fa898' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px;}
+optgroup{color:var(--am);}option{background:var(--sur);color:var(--tx);}
+.tr2{display:grid;grid-template-columns:1fr 34px 1fr;gap:7px;align-items:center;margin-top:11px;}
+.tvs{text-align:center;font-size:11px;font-weight:700;color:var(--mu);}
+.fg label{font-size:11.5px;color:var(--mu);display:block;margin-bottom:5px;font-weight:500;}
+.nr{display:flex;align-items:center;gap:8px;margin-top:9px;font-size:13px;color:var(--mu);}
+.nr input[type=checkbox]{accent-color:var(--am);width:15px;height:15px;}
+.st{font-size:11px;color:var(--mu2);background:var(--sur3);padding:3px 9px;border-radius:20px;margin-left:5px;}
+.fr{display:flex;gap:6px;margin-bottom:11px;}
+.fb{background:transparent;border:1px solid var(--b2);color:var(--mu);font-size:12px;font-family:'Inter',sans-serif;padding:5px 13px;border-radius:20px;cursor:pointer;transition:all .15s;}
+.fb.active{background:var(--adim);border-color:var(--abr);color:var(--am);}
+.og{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:9px;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:11px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:11px;}
+.sec{font-size:11px;font-weight:700;color:var(--mu);letter-spacing:.08em;text-transform:uppercase;margin-bottom:13px;}
+
+.btn-am,.cb{
+  width:100%;height:46px;background:linear-gradient(135deg,var(--am),#c08f33);color:#1a1208;
+  font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.04em;border:none;border-radius:10px;
+  cursor:pointer;transition:filter .15s, transform .1s;
+}
+.btn-am:hover,.cb:hover{filter:brightness(1.08);}
+.btn-am:active,.cb:active{transform:scale(.99);}
+
+.mbox{background:var(--sur2);border:1px solid var(--b2);border-radius:11px;padding:13px 15px;margin-bottom:1rem;font-size:12px;color:var(--mu);line-height:1.85;}
+.mbox strong{color:var(--tx);}
+
+.h2hbox{background:linear-gradient(135deg,rgba(91,155,217,.07),rgba(91,155,217,.02));border:1px solid rgba(91,155,217,.22);border-radius:11px;padding:13px 15px;margin-bottom:1rem;}
+.h2h-title{font-size:11px;font-weight:700;color:var(--bl);letter-spacing:.08em;text-transform:uppercase;margin-bottom:9px;}
+.h2h-row{display:flex;gap:9px;flex-wrap:wrap;}
+.h2h-s{background:rgba(91,155,217,.08);border:1px solid rgba(91,155,217,.18);border-radius:7px;padding:6px 11px;text-align:center;}
+.h2h-s .hl{font-size:10px;color:var(--mu);}.h2h-s .hv{font-size:16px;font-weight:700;color:var(--bl);font-family:'Bebas Neue',sans-serif;}
+
+.xg-strip{background:var(--sur2);border:1px solid var(--b2);border-radius:12px;padding:15px 19px;margin-bottom:11px;display:flex;align-items:center;gap:22px;flex-wrap:wrap;}
+.xgt .xn{font-size:11px;color:var(--mu);font-weight:500;}.xgt .xv{font-size:28px;font-weight:700;font-family:'Bebas Neue',sans-serif;color:var(--am);}
+.edge-bar{padding:10px 14px;border-left:3px solid var(--am);background:var(--adim);border-radius:0 8px 8px 0;font-size:12.5px;color:var(--mu);margin-bottom:1rem;line-height:1.6;}
+
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--b2);margin-bottom:1.1rem;}
+.tab{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--mu);font-family:'Inter',sans-serif;font-size:13px;font-weight:500;padding:7px 17px 11px;cursor:pointer;margin-bottom:-1px;transition:color .15s;}
+.tab.active{color:var(--am);border-bottom-color:var(--am);}
+
+.mt{width:100%;border-collapse:collapse;}
+.mt th{font-size:10px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;text-align:left;padding:8px 11px;border-bottom:1px solid var(--b2);}
+.mt td{padding:10px 11px;border-bottom:1px solid var(--b);font-size:13px;vertical-align:middle;}
+.mt tr:last-child td{border-bottom:none;}
+.mt tr:hover td{background:rgba(212,164,67,.025);}
+.mn2{font-weight:600;}
+.ep,.epos{color:var(--gn);font-weight:700;}.en,.eneg{color:var(--rd);}.eu,.eneu{color:var(--mu);}
+.fo{font-family:'Bebas Neue',sans-serif;font-size:15px;color:var(--bl);}
+.py{display:inline-block;background:var(--gdim);border:1px solid var(--gbr);color:var(--gn);font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;}
+.ps{display:inline-block;background:var(--rdim);border:1px solid var(--rbr);color:#e9847a;font-size:10px;padding:3px 8px;border-radius:20px;}
+
+.hf{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:1.25rem;align-items:center;}
+.fg2{display:flex;gap:3px;background:var(--sur);border:1px solid var(--b2);border-radius:9px;padding:3px;}
+.fb2{background:transparent;border:none;color:var(--mu);font-size:12px;font-family:'Inter',sans-serif;padding:5px 13px;border-radius:7px;cursor:pointer;white-space:nowrap;transition:all .15s;}
+.fb2.active{background:var(--sur3);color:var(--tx);}
+.ab{background:transparent;border:1px solid var(--b2);color:var(--mu);font-size:12px;font-family:'Inter',sans-serif;padding:6px 15px;border-radius:9px;cursor:pointer;}
+.ab:hover{color:var(--tx);border-color:var(--am);}
+
+.ht{width:100%;border-collapse:collapse;}
+.ht th{font-size:10px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;text-align:left;padding:9px 12px;border-bottom:1px solid var(--b2);}
+.ht td{padding:11px 12px;border-bottom:1px solid var(--b);font-size:13px;vertical-align:middle;}
+.ht tr:last-child td{border-bottom:none;}
+.ht tr:hover td{background:rgba(212,164,67,.025);}
+.hm{font-weight:600;}.hd2{font-size:11px;color:var(--mu);display:block;margin-top:2px;}
+.ho{font-family:'Bebas Neue',sans-serif;font-size:15px;color:var(--bl);}
+.hok{color:var(--gn);font-weight:700;}.hko{color:var(--rd);}.hop{color:var(--am);}
+.hpos{color:var(--gn);font-weight:700;font-family:'Bebas Neue',sans-serif;}
+.hneg{color:var(--rd);font-family:'Bebas Neue',sans-serif;}
+
+.ap{background:var(--sur);border:1px solid var(--b2);border-radius:13px;padding:1.2rem;margin-bottom:1rem;}
+.apt{font-size:13px;font-weight:600;margin-bottom:13px;display:flex;justify-content:space-between;align-items:center;}
+.apc{background:none;border:none;color:var(--mu);cursor:pointer;font-size:19px;}
+.af label{font-size:11.5px;color:var(--mu);display:block;margin-bottom:5px;font-weight:500;}
+.aa{display:flex;gap:7px;}
+.aa button{flex:1;height:38px;border-radius:9px;font-size:12px;font-family:'Inter',sans-serif;cursor:pointer;font-weight:600;}
+.bw{background:var(--gdim);border:1px solid var(--gbr);color:var(--gn);}
+.bl2{background:var(--rdim);border:1px solid var(--rbr);color:var(--rd);}
+.bo{background:var(--sur2);border:1px solid var(--b2);color:var(--mu);}
+
+.date-chip{flex-shrink:0;background:var(--sur);border:1px solid var(--b2);border-radius:11px;padding:9px 16px;cursor:pointer;text-align:center;min-width:64px;transition:all .15s;}
+.date-chip:hover{border-color:var(--am);}
+.date-chip.active{background:var(--adim);border-color:var(--am);}
+.date-chip .dc-day{font-family:'Bebas Neue',sans-serif;font-size:20px;line-height:1;color:var(--tx);}
+.date-chip.active .dc-day{color:var(--am);}
+.date-chip .dc-month{font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:.04em;margin-top:2px;}
+.date-chip .dc-count{font-size:9px;color:var(--mu2);margin-top:1px;}
+#date-scroll::-webkit-scrollbar{height:6px;}
+#date-scroll::-webkit-scrollbar-track{background:var(--sur2);border-radius:10px;}
+#date-scroll::-webkit-scrollbar-thumb{background:var(--b2);border-radius:10px;}
+.result-row{background:var(--sur);border:1px solid var(--b);border-radius:11px;padding:13px 15px;margin-bottom:8px;display:flex;align-items:center;gap:13px;}
+.result-row .rr-date{font-size:10.5px;color:var(--mu);min-width:42px;font-weight:500;}
+.result-row .rr-team{font-size:13.5px;font-weight:600;flex:1;display:flex;align-items:center;gap:7px;}
+.result-row .rr-team.right{justify-content:flex-end;text-align:right;}
+.result-row .rr-flag{font-size:18px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5));}
+.result-row .rr-score{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--am);background:var(--adim);border:1px solid var(--abr);padding:4px 13px;border-radius:8px;flex-shrink:0;}
+.result-row .rr-tag{font-size:10.5px;color:var(--mu2);flex-shrink:0;min-width:36px;text-align:right;}
 .hidden{display:none!important;}
-footer{border-top:1px solid var(--b);padding:20px;text-align:center;font-size:11px;color:var(--mu);}
-@media(max-width:680px){.sb{grid-template-columns:repeat(2,1fr);}.g2,.g3{grid-template-columns:1fr;}}
+footer{border-top:1px solid var(--b2);padding:24px;text-align:center;font-size:11px;color:var(--mu2);}
+
+@media(max-width:680px){
+  .tc{grid-template-columns:1fr;}
+  .sb{grid-template-columns:repeat(2,1fr);}
+  .og,.g2,.g3{grid-template-columns:1fr;}
+  .hero h1{font-size:32px;}
+  .mfl{font-size:18px;}
+}
 </style>
 </head>
 <body>
 <nav>
   <div class="ni">
-    <div class="logo">Picks<span>Mundial</span></div>
-    <button class="nl active" onclick="gp('home',this)">Picks de hoy</button>
-    <button class="nl" onclick="gp('calc',this)">Análisis</button>
-    <button class="nl" onclick="gp('hist',this)">Historial</button>
-    <button class="nl" onclick="gp('mybet',this)">Mis Apuestas</button>
+    <div class="logo" onclick="gp('home',document.querySelector('.nl'))" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();gp('home',document.querySelector('.nl'));}" style="cursor:pointer;" role="button" tabindex="0" aria-label="Ir al inicio">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+        <circle cx="14" cy="14" r="12.5" stroke="var(--am)" stroke-width="1.5" fill="none"/>
+        <path d="M14 5.6l3.9 2.85-1.5 4.6h-4.8l-1.5-4.6L14 5.6z" stroke="var(--am)" stroke-width="1.3" stroke-linejoin="round" fill="rgba(212,164,67,.1)"/>
+        <path d="M14 2.2v3.4M5.6 8.7l2.9 2.1M3.2 17.6l4.55-1.5M9 25l2.4-4.1M18.6 25l-2.4-4.1M24.8 17.6l-4.55-1.5M22.4 8.7l-2.9 2.1" stroke="var(--am)" stroke-width="1.1" stroke-linecap="round"/>
+        <text x="14" y="17.3" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="11.5" fill="var(--am)">?</text>
+      </svg>
+      Guess<span>Bet</span>
+    </div>
+    <button class="nl active" onclick="gp('home',this)">Inicio</button>
+    <button class="nl" onclick="gp('calc',this)">Analizar un partido</button>
+    <button class="nl" onclick="gp('hist',this)">Resultados pasados</button>
+    <button class="nl" onclick="gp('mybet',this)">Mis apuestas</button>
   </div>
 </nav>
 
@@ -93,32 +260,32 @@ footer{border-top:1px solid var(--b);padding:20px;text-align:center;font-size:11
 <div class="wrap">
   <div style="margin-bottom:1.75rem;">
     <div style="font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--am);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><span style="width:6px;height:6px;background:var(--gn);border-radius:50%;display:inline-block;animation:pulse 2s infinite;"></span> Mundial 2026 · En juego ahora</div>
-    <h1 style="font-size:26px;font-weight:700;line-height:1.2;margin-bottom:6px;">Picks IA del <span style="color:var(--am);">Mundial 2026</span></h1>
-    <p style="font-size:13px;color:var(--mu);max-width:540px;">Modelo Poisson calibrado con 14.438 partidos competitivos (2004-2026) + resultados reales del torneo + 407 pares H2H.</p>
-    <div style="display:inline-flex;align-items:center;gap:6px;background:var(--bdim);border:1px solid rgba(59,130,246,.25);border-radius:20px;padding:4px 12px;font-size:11px;color:var(--bl);margin-top:10px;">📡 martj42/international_results · 14.438 partidos · 20 años · 24 partidos WC2026 actualizados</div>
+    <h1 style="font-size:26px;font-weight:700;line-height:1.2;margin-bottom:6px;">Predicciones para el <span style="color:var(--am);">Mundial 2026</span></h1>
+    <p style="font-size:13px;color:var(--mu);max-width:540px;line-height:1.6;">Esta app calcula qué tan probable es que gane cada equipo, usando 20 años de resultados de fútbol y lo que ha pasado en este Mundial hasta ahora. Tú decides si apostar o no — esto es solo información para ayudarte a decidir.</p>
+    <div style="display:inline-flex;align-items:center;gap:6px;background:var(--bdim);border:1px solid rgba(59,130,246,.25);border-radius:20px;padding:4px 12px;font-size:11px;color:var(--bl);margin-top:10px;">📡 Basado en más de 14.000 partidos de fútbol de los últimos 20 años</div>
     <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;">
-      <div style="background:var(--sur2);border:1px solid var(--b2);border-radius:10px;padding:10px 16px;text-align:center;min-width:90px;"><div style="font-size:20px;font-weight:500;color:var(--am);">28</div><div style="font-size:11px;color:var(--mu);">Jugados</div></div>
-      <div style="background:var(--sur2);border:1px solid var(--b2);border-radius:10px;padding:10px 16px;text-align:center;min-width:90px;"><div style="font-size:20px;font-weight:500;color:var(--gn);">9</div><div style="font-size:11px;color:var(--mu);">Picks activos</div></div>
-      <div style="background:var(--sur2);border:1px solid var(--b2);border-radius:10px;padding:10px 16px;text-align:center;min-width:90px;"><div style="font-size:20px;font-weight:500;color:#a78bfa;" id="h-wr">—</div><div style="font-size:11px;color:var(--mu);">Win rate</div></div>
+      <div style="background:var(--sur2);border:1px solid var(--b2);border-radius:10px;padding:10px 16px;text-align:center;min-width:90px;"><div style="font-size:20px;font-weight:500;color:var(--am);">28</div><div style="font-size:11px;color:var(--mu);">Partidos jugados</div></div>
+      <div style="background:var(--sur2);border:1px solid var(--b2);border-radius:10px;padding:10px 16px;text-align:center;min-width:90px;"><div style="font-size:20px;font-weight:500;color:var(--gn);">9</div><div style="font-size:11px;color:var(--mu);">Apuestas sugeridas</div></div>
+      <div style="background:var(--sur2);border:1px solid var(--b2);border-radius:10px;padding:10px 16px;text-align:center;min-width:90px;"><div style="font-size:20px;font-weight:500;color:#a78bfa;" id="h-wr">—</div><div style="font-size:11px;color:var(--mu);">Tus aciertos</div></div>
       <div style="background:var(--sur2);border:1px solid var(--b2);border-radius:10px;padding:10px 16px;text-align:center;min-width:90px;"><div style="font-size:20px;font-weight:500;color:var(--gn);" id="h-pl">—</div><div style="font-size:11px;color:var(--mu);">P&amp;L</div></div>
     </div>
   </div>
   <div style="background:var(--sur);border:1px solid var(--b);border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.5rem;">
-    <div style="font-size:11px;font-weight:600;color:var(--mu);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">🔥 Top picks del modelo — cuota justa</div>
+    <div style="font-size:11px;font-weight:600;color:var(--mu);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">🔥 Las apuestas que más nos gustan hoy</div>
     <div id="top-strip-content" style="color:var(--mu);font-size:13px;">Calculando...</div>
   </div>
   <div style="display:grid;grid-template-columns:1fr 320px;gap:1.5rem;align-items:start;">
     <div>
-      <div style="font-size:11px;font-weight:600;color:var(--mu);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">🏆 Mundial 2026 · Fase de grupos</div>
+      <div style="font-size:11px;font-weight:600;color:var(--mu);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">🏆 Partidos del Mundial 2026</div>
       <div id="match-list"></div>
     </div>
     <div>
-      <div style="font-size:11px;font-weight:600;color:var(--mu);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">🎯 Combinadas IA <span style="font-size:10px;font-weight:400;color:var(--mu);">generadas por el modelo</span></div>
+      <div style="font-size:11px;font-weight:600;color:var(--mu);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">🎯 Apuestas combinadas sugeridas <span style="font-size:10px;font-weight:400;color:var(--mu);">varias apuestas juntas, mayor premio</span></div>
       <div id="combinadas-content"></div>
       <div class="card" style="text-align:center;">
-        <div style="font-size:13px;font-weight:500;margin-bottom:5px;">¿Tienes cuotas de Coolbet?</div>
-        <div style="font-size:12px;color:var(--mu);margin-bottom:10px;">Calcula el EDGE real de cualquier partido</div>
-        <button class="btn-am" onclick="gp('calc',document.querySelectorAll('.nl')[1])" style="width:100%;">Abrir analizador →</button>
+        <div style="font-size:13px;font-weight:500;margin-bottom:5px;">¿Quieres analizar un partido específico?</div>
+        <div style="font-size:12px;color:var(--mu);margin-bottom:10px;">Escribe las cuotas de tu casa de apuestas y te decimos si conviene apostar</div>
+        <button class="btn-am" onclick="gp('calc',document.querySelectorAll('.nl')[1])" style="width:100%;">Analizar un partido →</button>
       </div>
     </div>
   </div>
@@ -129,15 +296,15 @@ footer{border-top:1px solid var(--b);padding:20px;text-align:center;font-size:11
 <div class="page hidden" id="page-calc">
 <div class="wrap" style="max-width:780px;">
   <div style="margin-bottom:1.5rem;">
-    <div style="font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--am);text-transform:uppercase;margin-bottom:6px;">⚙️ Analizador con datos reales</div>
-    <h1 style="font-size:22px;margin-bottom:6px;">Análisis de picks</h1>
-    <p style="font-size:13px;color:var(--mu);">Modelo calibrado con 14.438 partidos competitivos (2004–2026) + resultados reales del Mundial 2026 + historial H2H.</p>
+    <div style="font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--am);text-transform:uppercase;margin-bottom:6px;">⚙️ Analiza un partido</div>
+    <h1 style="font-size:22px;margin-bottom:6px;">¿Conviene apostar a este partido?</h1>
+    <p style="font-size:13px;color:var(--mu);line-height:1.6;">Elige un partido, escribe las cuotas que te ofrece tu casa de apuestas, y te decimos si el modelo cree que tienes ventaja o no.</p>
   </div>
-  <div class="card" style="font-size:12px;color:var(--mu);line-height:1.8;margin-bottom:1rem;">
-    <strong style="color:var(--tx);">Base de datos del modelo:</strong><br>
-    📊 <strong style="color:var(--tx);">14.438 partidos competitivos</strong> ponderados por importancia (Mundiales=1.0 / Eliminatorias=0.8 / Amistosos=0.25)<br>
-    📡 <strong style="color:var(--tx);">17 partidos reales del WC2026</strong> — blended 70% datos reales + 30% histórico<br>
-    🔄 <strong style="color:var(--tx);">407 pares H2H</strong> entre las 47 selecciones clasificadas — ajuste final del 15%
+  <div class="card" style="font-size:12px;color:var(--mu);line-height:1.9;margin-bottom:1rem;">
+    <strong style="color:var(--tx);">¿En qué se basa esto?</strong><br>
+    📊 Más de <strong style="color:var(--tx);">14.000 partidos de fútbol</strong> jugados en los últimos 20 años (mundiales, eliminatorias, amistosos, etc., cada uno cuenta según su importancia)<br>
+    📡 Los <strong style="color:var(--tx);">resultados reales que ya van</strong> en este Mundial 2026<br>
+    🔄 <strong style="color:var(--tx);">Partidos anteriores entre los mismos dos equipos</strong>, cuando hay suficiente historial entre ellos
   </div>
 
   <div class="card">
@@ -156,53 +323,66 @@ footer{border-top:1px solid var(--b);padding:20px;text-align:center;font-size:11
   </div>
 
   <div class="card">
-    <div class="sec">2 — Cuotas de Coolbet (para detectar valor)</div>
+    <div class="sec">Paso 2 — Copia las cuotas desde tu casa de apuestas</div>
+    <p style="font-size:12px;color:var(--mu);margin-bottom:12px;line-height:1.6;">
+      Una "cuota" es el número que multiplica tu dinero si ganas la apuesta. Por ejemplo, si apuestas $10 con una cuota de 2.00, ganarías $20 en total. Busca estos números en la app o web donde apuestas, y escríbelos aquí (puedes dejar vacíos los que no encuentres).
+    </p>
     <div style="display:flex;gap:5px;margin-bottom:10px;">
-      <button class="active" id="fmt-dec" onclick="setFmt('decimal',this)" style="height:28px;padding:0 12px;font-size:12px;border-radius:20px;background:var(--adim);border-color:var(--abr);color:var(--am);">Decimal (1.91)</button>
-      <button id="fmt-am" onclick="setFmt('american',this)" style="height:28px;padding:0 12px;font-size:12px;border-radius:20px;">Americano (-110)</button>
+      <button class="active" id="fmt-dec" onclick="setFmt('decimal',this)" style="height:28px;padding:0 12px;font-size:12px;border-radius:20px;background:var(--adim);border-color:var(--abr);color:var(--am);">Formato decimal (ej. 1.91)</button>
+      <button id="fmt-am" onclick="setFmt('american',this)" style="height:28px;padding:0 12px;font-size:12px;border-radius:20px;">Formato americano (ej. -110)</button>
     </div>
 
+    <div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;margin:10px 0 6px;">¿Quién gana el partido?</div>
     <div class="g3">
-      <div class="fg"><label id="l1">Iraq (1)</label><input type="number" id="oh" placeholder="ej. 3.80" step="0.01"/></div>
-      <div class="fg"><label>Empate (X)</label><input type="number" id="od" placeholder="ej. 3.50" step="0.01"/></div>
-      <div class="fg"><label id="l2">Norway (2)</label><input type="number" id="oa" placeholder="ej. 1.85" step="0.01"/></div>
-    </div>
-    <div class="g3">
-      <div class="fg"><label>Over 2.5</label><input type="number" id="oo" placeholder="ej. 1.90" step="0.01"/></div>
-      <div class="fg"><label>Under 2.5</label><input type="number" id="ou" placeholder="ej. 1.80" step="0.01"/></div>
-      <div class="fg"><label>BTTS (Sí)</label><input type="number" id="ob" placeholder="ej. 1.95" step="0.01"/></div>
+      <div class="fg"><label id="l1">Gana Iraq</label><input type="number" id="oh" placeholder="ej. 3.80" step="0.01"/></div>
+      <div class="fg"><label>Empatan</label><input type="number" id="od" placeholder="ej. 3.50" step="0.01"/></div>
+      <div class="fg"><label id="l2">Gana Norway</label><input type="number" id="oa" placeholder="ej. 1.85" step="0.01"/></div>
     </div>
 
-    <button type="button" onclick="toggleExtraMarkets()" id="extra-toggle" style="background:none;border:none;color:var(--bl);font-size:12px;cursor:pointer;padding:4px 0;margin-bottom:8px;display:flex;align-items:center;gap:4px;">
-      <span id="extra-arrow">▸</span> Más mercados (Doble Oportunidad, BTTS No, Apuesta no válida)
+    <div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;margin:14px 0 6px;">¿Cuántos goles habrá en total?</div>
+    <div class="g3">
+      <div class="fg"><label>Más de 2.5 goles</label><input type="number" id="oo" placeholder="ej. 1.90" step="0.01"/></div>
+      <div class="fg"><label>Menos de 2.5 goles</label><input type="number" id="ou" placeholder="ej. 1.80" step="0.01"/></div>
+      <div class="fg"><label>Ambos equipos anotan</label><input type="number" id="ob" placeholder="ej. 1.95" step="0.01"/></div>
+    </div>
+
+    <button type="button" onclick="toggleExtraMarkets()" id="extra-toggle" style="background:none;border:none;color:var(--bl);font-size:12px;cursor:pointer;padding:4px 0;margin:10px 0 8px;display:flex;align-items:center;gap:4px;">
+      <span id="extra-arrow">▸</span> Ver más tipos de apuesta (opcional)
     </button>
     <div id="extra-markets" class="hidden">
-      <div class="g3" style="margin-bottom:8px;">
-        <div class="fg"><label>BTTS (No)</label><input type="number" id="obn" placeholder="ej. 1.41" step="0.01"/></div>
-        <div class="fg"><label id="lbl-dnbh">DNB: Gana Local</label><input type="number" id="odnbh" placeholder="ej. 1.06" step="0.01"/></div>
-        <div class="fg"><label id="lbl-dnba">DNB: Gana Visitante</label><input type="number" id="odnba" placeholder="ej. 19.50" step="0.01"/></div>
+      <p style="font-size:12px;color:var(--mu);margin-bottom:10px;line-height:1.6;">
+        Estas son formas alternativas de apostar al mismo partido. No es necesario llenarlas — solo hazlo si tu casa de apuestas las ofrece y te interesan.
+      </p>
+      <div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;margin-bottom:6px;">¿Ningún equipo anota? (lo contrario a "ambos anotan")</div>
+      <div class="g3" style="margin-bottom:14px;">
+        <div class="fg"><label>NO ambos anotan</label><input type="number" id="obn" placeholder="ej. 1.41" step="0.01"/></div>
       </div>
-      <div class="g3" style="margin-bottom:8px;">
-        <div class="fg"><label id="lbl-dc1x">DO: Local/Empate</label><input type="number" id="odc1x" placeholder="ej. 1.06" step="0.01"/></div>
-        <div class="fg"><label id="lbl-dcx2">DO: Empate/Visitante</label><input type="number" id="odcx2" placeholder="ej. 7.80" step="0.01"/></div>
-        <div class="fg"><label id="lbl-dc12">DO: Local/Visitante</label><input type="number" id="odc12" placeholder="ej. 1.06" step="0.01"/></div>
+      <div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;margin-bottom:6px;">Te devuelven el dinero si hay empate (apuesta más segura, paga menos)</div>
+      <div class="g3" style="margin-bottom:14px;">
+        <div class="fg"><label id="lbl-dnbh">Gana Local (sin contar empate)</label><input type="number" id="odnbh" placeholder="ej. 1.06" step="0.01"/></div>
+        <div class="fg"><label id="lbl-dnba">Gana Visitante (sin contar empate)</label><input type="number" id="odnba" placeholder="ej. 19.50" step="0.01"/></div>
       </div>
-      <div style="font-size:11px;color:var(--mu);margin-bottom:8px;">DNB = Empate Apuesta No Válida (Draw No Bet) · DO = Doble Oportunidad</div>
+      <div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;margin-bottom:6px;">Aciertas si pasa cualquiera de estas dos cosas (más fácil de ganar, paga menos)</div>
+      <div class="g3" style="margin-bottom:8px;">
+        <div class="fg"><label id="lbl-dc1x">Gana Local o empatan</label><input type="number" id="odc1x" placeholder="ej. 1.06" step="0.01"/></div>
+        <div class="fg"><label id="lbl-dcx2">Empatan o gana Visitante</label><input type="number" id="odcx2" placeholder="ej. 7.80" step="0.01"/></div>
+        <div class="fg"><label id="lbl-dc12">Gana Local o gana Visitante (no hay empate)</label><input type="number" id="odc12" placeholder="ej. 1.06" step="0.01"/></div>
+      </div>
     </div>
 
-    <button class="btn-am" onclick="runCalc()" style="width:100%;margin-top:6px;">Calcular picks</button>
+    <button class="btn-am" onclick="runCalc()" style="width:100%;margin-top:6px;">Ver resultado del análisis</button>
   </div>
 
   <div class="card" id="live-card">
-    <div class="ctit"><span class="n" style="background:rgba(239,68,68,.2);color:var(--rd);">●</span> En vivo <span style="font-size:10px;font-weight:400;color:var(--mu);margin-left:6px;">Opcional — recalcula con el estado actual del partido</span></div>
+    <div class="ctit"><span class="n" style="background:rgba(239,68,68,.2);color:var(--rd);">●</span> ¿El partido ya empezó? <span style="font-size:10px;font-weight:400;color:var(--mu);margin-left:6px;">Opcional — esto recalcula todo según cómo va el partido en este momento</span></div>
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
       <input type="checkbox" id="live-toggle" onchange="toggleLive()" style="width:15px;height:15px;accent-color:var(--rd);" />
-      <label for="live-toggle" style="font-size:13px;color:var(--mu);cursor:pointer;">Partido en juego ahora</label>
+      <label for="live-toggle" style="font-size:13px;color:var(--mu);cursor:pointer;">Sí, el partido se está jugando ahora mismo</label>
     </div>
     <div id="live-fields" class="hidden">
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px;">
         <div class="fg">
-          <label>Minuto</label>
+          <label>¿En qué minuto va?</label>
           <input type="number" id="live-min" placeholder="ej. 67" min="1" max="120" value="45" />
         </div>
         <div class="fg">
@@ -216,17 +396,17 @@ footer{border-top:1px solid var(--b);padding:20px;text-align:center;font-size:11
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
         <div class="fg">
-          <label id="live-lbl-rh">🟥 Expulsados local</label>
-          <input type="number" id="live-rh" value="0" min="0" max="5" />
+          <label id="live-lbl-rh">🟥 ¿Expulsaron a algún jugador del equipo local?</label>
+          <input type="number" id="live-rh" value="0" min="0" max="5" placeholder="0 si no hay" />
         </div>
         <div class="fg">
-          <label id="live-lbl-ra">🟥 Expulsados visitante</label>
-          <input type="number" id="live-ra" value="0" min="0" max="5" />
+          <label id="live-lbl-ra">🟥 ¿Expulsaron a algún jugador del equipo visitante?</label>
+          <input type="number" id="live-ra" value="0" min="0" max="5" placeholder="0 si no hay" />
         </div>
       </div>
       <div style="background:var(--rdim);border:1px solid var(--rbr);border-radius:8px;padding:8px 12px;font-size:12px;color:var(--mu);display:flex;align-items:center;gap:8px;">
         <span style="color:var(--rd);font-size:14px;">⚡</span>
-        Modo en vivo: las probabilidades se recalculan con los xG <strong style="color:var(--tx);">restantes</strong> del partido, el marcador actual y las expulsiones.
+        Al llenar esto, el análisis toma en cuenta cuánto tiempo queda, cómo va el marcador, y si algún equipo tiene menos jugadores en la cancha.
       </div>
     </div>
   </div>
@@ -234,30 +414,33 @@ footer{border-top:1px solid var(--b);padding:20px;text-align:center;font-size:11
   <div id="res" class="hidden">
     <div id="explanation"></div>
     <div class="h2h-box hidden" id="h2hbox">
-      <div class="h2h-title">🔄 Historial H2H</div>
+      <div class="h2h-title">🔄 Cuando estos dos equipos jugaron antes</div>
       <div class="h2h-row" id="h2hrow"></div>
     </div>
     <div class="xg-strip">
-      <div class="xgt"><div class="xn" id="xnh"></div><div class="xv" id="xvh">—</div><div style="font-size:10px;color:var(--mu);margin-top:2px;" id="xg-label-h">xG esperados</div></div>
+      <div class="xgt"><div class="xn" id="xnh"></div><div class="xv" id="xvh">—</div><div style="font-size:10px;color:var(--mu);margin-top:2px;" id="xg-label-h">goles que se espera que marque</div></div>
       <div style="font-size:13px;color:var(--mu);">vs</div>
-      <div class="xgt"><div class="xn" id="xna"></div><div class="xv" id="xva">—</div><div style="font-size:10px;color:var(--mu);margin-top:2px;" id="xg-label-a">xG esperados</div></div>
+      <div class="xgt"><div class="xn" id="xna"></div><div class="xv" id="xva">—</div><div style="font-size:10px;color:var(--mu);margin-top:2px;" id="xg-label-a">goles que se espera que marque</div></div>
       <div style="margin-left:auto;font-size:11px;color:var(--mu);" id="slbl"></div>
       <div id="dsrc" style="font-size:11px;"></div>
     </div>
     <div class="edge-bar" id="enote"></div>
+    <p style="font-size:12px;color:var(--mu);margin:0 0 10px;line-height:1.6;">
+      Marca la casilla junto a cualquier apuesta que te interese. Puedes elegir solo una, o combinar varias para armar una sola apuesta (esto se llama "combinada": todas tienen que cumplirse para ganar, pero el premio es más grande).
+    </p>
     <div class="tabs">
-      <button class="tab active" onclick="setRT('main',this)">Mercados principales</button>
-      <button class="tab" onclick="setRT('sec',this)">Mercados secundarios</button>
+      <button class="tab active" onclick="setRT('main',this)">Apuestas principales</button>
+      <button class="tab" onclick="setRT('sec',this)">Otras opciones (corners, tarjetas...)</button>
     </div>
     <div class="card" id="tmain" style="padding:0;overflow:hidden;">
-      <table class="mt"><thead><tr><th style="width:24px;"></th><th>Mercado</th><th id="th-modelo">Modelo</th><th>Mdo. impl.</th><th>Edge</th><th>Cuota justa</th><th></th></tr></thead>
+      <table class="mt"><thead><tr><th style="width:24px;"></th><th>Tipo de apuesta</th><th title="Qué tan probable cree el modelo que es esto">Probabilidad</th><th title="Lo que tu cuota dice que cree el mercado">Según tu cuota</th><th title="Diferencia entre lo que cree el modelo y lo que paga la cuota">Diferencia</th><th title="La cuota que el modelo considera justa para esta probabilidad">Cuota justa</th><th></th></tr></thead>
       <tbody id="mtb"></tbody></table>
     </div>
 
     <div class="card" id="betbuilder-card" style="border:1px solid var(--gbr);">
       <div class="ctit" style="justify-content:space-between;">
-        <span><span class="n" style="background:var(--gdim);color:var(--gn);">🎯</span> Bet Builder <span style="font-size:10px;font-weight:400;color:var(--mu);margin-left:6px;">Selecciona uno o varios mercados</span></span>
-        <span id="bb-count" style="font-size:11px;color:var(--mu);">0 seleccionados</span>
+        <span><span class="n" style="background:var(--gdim);color:var(--gn);">🎯</span> Tu apuesta <span style="font-size:10px;font-weight:400;color:var(--mu);margin-left:6px;">Lo que vas a registrar</span></span>
+        <span id="bb-count" style="font-size:11px;color:var(--mu);">0 elegidas</span>
       </div>
       <div id="bb-legs" style="margin-bottom:10px;">
         <div style="font-size:12px;color:var(--mu2);font-style:italic;padding:8px 0;">Marca las casillas de la tabla de arriba para armar tu apuesta combinada.</div>
@@ -269,8 +452,8 @@ footer{border-top:1px solid var(--b);padding:20px;text-align:center;font-size:11
         </div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end;">
-        <div class="fg"><label>Stake (unidades)</label><input type="number" id="bb-stake" value="1" step="0.1" min="0.1"/></div>
-        <div class="fg"><label>Casa de apuestas</label>
+        <div class="fg"><label>¿Cuánto vas a apostar?</label><input type="number" id="bb-stake" value="1" step="0.1" min="0.1"/></div>
+        <div class="fg"><label>¿En qué casa de apuestas?</label>
           <select id="bb-bookie" style="width:100%;background:var(--sur2);border:1px solid var(--b2);color:var(--tx);font-family:'Inter',sans-serif;font-size:13px;padding:0 10px;height:38px;border-radius:7px;">
             <option>Coolbet</option><option>Betano</option><option>Bet365</option><option>Jugabet</option><option>1xBet</option><option>Otra</option>
           </select>
@@ -279,23 +462,29 @@ footer{border-top:1px solid var(--b);padding:20px;text-align:center;font-size:11
       </div>
     </div>
     <div class="card hidden" id="tsec" style="padding:0;overflow:hidden;">
-      <div style="padding:10px 14px;font-size:11px;font-weight:600;color:var(--mu);letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--b);">Mercados secundarios — heurístico</div>
-      <table class="mt"><thead><tr><th style="width:24px;"></th><th>Mercado</th><th>Estimación</th><th>Línea típica</th><th>Pick</th><th>Cuota</th></tr></thead>
+      <div style="padding:10px 14px;font-size:12px;font-weight:600;color:var(--mu);border-bottom:1px solid var(--b);">📐 Otras estimaciones del partido (corners, tarjetas, tiros) — son cálculos aproximados, no tan precisos como las apuestas de arriba</div>
+      <table class="mt"><thead><tr><th style="width:24px;"></th><th>De qué se trata</th><th>Estimado</th><th>Número de referencia</th><th>Lo más probable</th><th>Cuota</th></tr></thead>
       <tbody id="stb"></tbody></table>
-      <div style="padding:10px 14px;font-size:11px;color:var(--mu);">Orientativo. Ingresa la cuota de tu casa para poder seleccionarlo en el Bet Builder.</div>
+      <div style="padding:10px 14px;font-size:11px;color:var(--mu);">Estos números son orientativos. Si tu casa de apuestas ofrece estas opciones, escribe la cuota para poder agregarlas a tu apuesta.</div>
     </div>
   </div>
 </div>
 </div>
 
-<!-- HISTORIAL DEL MODELO -->
+<!-- RESULTADOS PASADOS -->
 <div class="page hidden" id="page-hist">
 <div class="wrap">
   <div style="margin-bottom:1.5rem;">
-    <div style="font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--am);text-transform:uppercase;margin-bottom:6px;">📊 Resultados reales</div>
-    <h1 style="font-size:22px;margin-bottom:4px;">Historial · WC 2026</h1>
-    <p style="font-size:13px;color:var(--mu);">Partidos jugados en el Mundial 2026 con goles reales.</p>
+    <div style="font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--am);text-transform:uppercase;margin-bottom:6px;" id="hist-eyebrow">📊 Lo que ya pasó</div>
+    <h1 style="font-size:22px;margin-bottom:4px;" id="hist-title">Partidos ya jugados</h1>
+    <p style="font-size:13px;color:var(--mu);" id="hist-subtitle">Aquí ves los resultados reales de los partidos que ya se jugaron.</p>
   </div>
+
+  <div style="margin-bottom:1.2rem;">
+    <div style="font-size:11px;font-weight:700;color:var(--mu);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">Elige una fecha</div>
+    <div id="date-scroll" style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;scrollbar-width:thin;"></div>
+  </div>
+
   <div id="hist-list"></div>
 </div>
 </div>
@@ -304,51 +493,52 @@ footer{border-top:1px solid var(--b);padding:20px;text-align:center;font-size:11
 <div class="page hidden" id="page-mybet">
 <div class="wrap" style="max-width:780px;">
   <div style="margin-bottom:1.75rem;">
-    <div style="font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--am);text-transform:uppercase;margin-bottom:6px;">🎯 Mi registro personal</div>
-    <h1 style="font-size:22px;margin-bottom:4px;">Mis Apuestas</h1>
-    <p style="font-size:13px;color:var(--mu);">Registra cada pick, marca el resultado y sigue tu rendimiento real.</p>
+    <div style="font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--am);text-transform:uppercase;margin-bottom:6px;">🎯 Tu registro personal</div>
+    <h1 style="font-size:22px;margin-bottom:4px;">Mis apuestas</h1>
+    <p style="font-size:13px;color:var(--mu);">Anota cada apuesta que hagas, márcala como ganada o perdida cuando termine el partido, y aquí podrás ver cuántas has acertado.</p>
     <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">
-      <button onclick="exportMyBets()" style="height:30px;padding:0 12px;font-size:12px;border-radius:8px;border:1px solid var(--gbr);background:var(--gdim);color:var(--gn);cursor:pointer;display:inline-flex;align-items:center;gap:5px;">⬇ Exportar historial</button>
-      <button onclick="document.getElementById('import-file').click()" style="height:30px;padding:0 12px;font-size:12px;border-radius:8px;border:1px solid var(--b2);background:var(--sur2);color:var(--tx);cursor:pointer;display:inline-flex;align-items:center;gap:5px;">⬆ Importar historial</button>
+      <button onclick="exportMyBets()" style="height:30px;padding:0 12px;font-size:12px;border-radius:8px;border:1px solid var(--gbr);background:var(--gdim);color:var(--gn);cursor:pointer;display:inline-flex;align-items:center;gap:5px;">⬇ Guardar copia de mis apuestas</button>
+      <button onclick="document.getElementById('import-file').click()" style="height:30px;padding:0 12px;font-size:12px;border-radius:8px;border:1px solid var(--b2);background:var(--sur2);color:var(--tx);cursor:pointer;display:inline-flex;align-items:center;gap:5px;">⬆ Subir una copia guardada</button>
       <input type="file" id="import-file" accept=".json" style="display:none;" onchange="importMyBets(event)" />
-      <span style="font-size:11px;color:var(--mu);align-self:center;">💡 Exporta antes de actualizar el archivo. Importar REEMPLAZA tu historial actual.</span>
+      <span style="font-size:11px;color:var(--mu);align-self:center;">💡 Guarda una copia antes de cambiar de archivo. Si subes una copia, reemplaza todo lo que tienes ahora.</span>
     </div>
   </div>
 
   <div class="sb">
-    <div class="sbl"><div class="sl">Registradas</div><div class="sv" id="ms-total">0</div></div>
-    <div class="sbl"><div class="sl">Win rate</div><div class="sv" id="ms-wr" style="color:var(--am);">—</div></div>
-    <div class="sbl"><div class="sl">P&amp;L total</div><div class="sv" id="ms-pl">—</div></div>
-    <div class="sbl"><div class="sl">ROI</div><div class="sv" id="ms-roi">—</div></div>
+    <div class="sbl"><div class="sl">Apuestas anotadas</div><div class="sv" id="ms-total">0</div></div>
+    <div class="sbl"><div class="sl">Porcentaje de aciertos</div><div class="sv" id="ms-wr" style="color:var(--am);">—</div></div>
+    <div class="sbl"><div class="sl">Dinero ganado o perdido</div><div class="sv" id="ms-pl">—</div></div>
+    <div class="sbl"><div class="sl">Rendimiento general</div><div class="sv" id="ms-roi">—</div></div>
   </div>
 
   <div class="tabs">
-    <button class="tab active" onclick="setMyTab('nueva',this)">+ Nueva</button>
-    <button class="tab" onclick="setMyTab('abiertas',this)">Abiertas <span id="open-badge" style="background:rgba(245,158,11,.15);color:var(--am);font-size:10px;padding:1px 6px;border-radius:10px;margin-left:3px;display:none;"></span></button>
-    <button class="tab" onclick="setMyTab('historial',this)">Historial</button>
+    <button class="tab active" onclick="setMyTab('nueva',this)">+ Anotar nueva apuesta</button>
+    <button class="tab" onclick="setMyTab('abiertas',this)">Esperando resultado <span id="open-badge" style="background:rgba(245,158,11,.15);color:var(--am);font-size:10px;padding:1px 6px;border-radius:10px;margin-left:3px;display:none;"></span></button>
+    <button class="tab" onclick="setMyTab('historial',this)">Ya terminadas</button>
   </div>
 
   <div id="my-nueva">
     <div class="card">
-      <div class="sec">Registrar apuesta</div>
+      <div class="sec">Anota tu apuesta</div>
+      <p style="font-size:12px;color:var(--mu);margin-bottom:12px;line-height:1.6;">Llena estos datos después de hacer tu apuesta real en tu casa de apuestas, para llevar un registro de cómo te va.</p>
       <div class="g2">
-        <div class="fg" style="grid-column:1/-1;"><label>Partido</label><input type="text" id="bf-match" placeholder="Ej: Argentina vs Algeria"/></div>
-        <div class="fg"><label>Pick / Mercado</label><input type="text" id="bf-pick" placeholder="Ej: Gana Argentina (1)"/></div>
-        <div class="fg"><label>Casa de apuestas</label><select id="bf-bookie"><option>Coolbet</option><option>Betano</option><option>Bet365</option><option>Jugabet</option><option>1xBet</option><option>Otra</option></select></div>
+        <div class="fg" style="grid-column:1/-1;"><label>¿Qué partido?</label><input type="text" id="bf-match" placeholder="Ej: Argentina vs Algeria"/></div>
+        <div class="fg"><label>¿Qué apostaste?</label><input type="text" id="bf-pick" placeholder="Ej: Gana Argentina"/></div>
+        <div class="fg"><label>¿En qué casa de apuestas?</label><select id="bf-bookie"><option>Coolbet</option><option>Betano</option><option>Bet365</option><option>Jugabet</option><option>1xBet</option><option>Otra</option></select></div>
       </div>
       <div class="g3">
-        <div class="fg"><label>Cuota (decimal)</label><input type="number" id="bf-odds" placeholder="1.42" step="0.01" min="1.01" oninput="myPreview()"/></div>
-        <div class="fg"><label>Stake (unidades)</label><input type="number" id="bf-stake" placeholder="1.5" step="0.1" min="0.1" oninput="myPreview()"/></div>
-        <div class="fg"><label>EV modelo (%)</label><input type="number" id="bf-ev" placeholder="9" step="0.1" oninput="myPreview()"/></div>
+        <div class="fg"><label>¿Qué cuota te dieron?</label><input type="number" id="bf-odds" placeholder="1.42" step="0.01" min="1.01" oninput="myPreview()"/></div>
+        <div class="fg"><label>¿Cuánto dinero apostaste?</label><input type="number" id="bf-stake" placeholder="1.5" step="0.1" min="0.1" oninput="myPreview()"/></div>
+        <div class="fg"><label title="Opcional: qué tanta ventaja calculó el análisis">Ventaja calculada (opcional)</label><input type="number" id="bf-ev" placeholder="9" step="0.1" oninput="myPreview()"/></div>
       </div>
       <div class="g2">
-        <div class="fg"><label>Fecha</label><input type="date" id="bf-date"/></div>
-        <div class="fg"><label>Competición</label><select id="bf-comp"><option>Mundial 2026</option><option>Premier League</option><option>La Liga</option><option>Champions League</option><option>Otra</option></select></div>
+        <div class="fg"><label>Fecha del partido</label><input type="date" id="bf-date"/></div>
+        <div class="fg"><label>Torneo</label><select id="bf-comp"><option>Mundial 2026</option><option>Premier League</option><option>La Liga</option><option>Champions League</option><option>Otra</option></select></div>
       </div>
-      <div id="my-preview" style="font-size:12px;color:var(--mu);padding:8px 10px;background:var(--sur2);border-radius:7px;margin-bottom:12px;">Ingresa cuota y stake para ver el retorno potencial.</div>
+      <div id="my-preview" style="font-size:12px;color:var(--mu);padding:8px 10px;background:var(--sur2);border-radius:7px;margin-bottom:12px;">Escribe la cuota y cuánto apostaste para ver cuánto podrías ganar.</div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <button class="btn-am" onclick="addMyBet()">+ Registrar apuesta</button>
-        <button onclick="clearMyForm()">Limpiar</button>
+        <button class="btn-am" onclick="addMyBet()">+ Anotar esta apuesta</button>
+        <button onclick="clearMyForm()">Borrar y empezar de nuevo</button>
       </div>
       <div style="font-size:11px;color:var(--mu);margin-top:10px;">💾 Guardado automáticamente en este navegador.</div>
     </div>
@@ -362,18 +552,18 @@ footer{border-top:1px solid var(--b);padding:20px;text-align:center;font-size:11
   <div id="my-historial" class="hidden">
     <div id="my-chart-wrap" style="margin-bottom:1rem;display:none;background:var(--sur2);border:1px solid var(--b);border-radius:10px;padding:10px;"></div>
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;align-items:center;">
-      <button onclick="setMyFilter('all',this)" style="height:28px;padding:0 12px;font-size:12px;border-radius:20px;" id="mf-all">Todos</button>
-      <button onclick="setMyFilter('won',this)" style="height:28px;padding:0 12px;font-size:12px;border-radius:20px;" id="mf-won">Ganadas</button>
-      <button onclick="setMyFilter('lost',this)" style="height:28px;padding:0 12px;font-size:12px;border-radius:20px;" id="mf-lost">Perdidas</button>
-      <button onclick="setMyFilter('open',this)" style="height:28px;padding:0 12px;font-size:12px;border-radius:20px;" id="mf-open">Abiertas</button>
-      <button onclick="if(confirm('¿Borrar todo?')){myBets=[];mySave();myRender();}" style="height:28px;padding:0 12px;font-size:12px;border-radius:20px;color:var(--rd);border-color:var(--rbr);margin-left:auto;">Borrar todo</button>
+      <button onclick="setMyFilter('all',this)" style="height:28px;padding:0 12px;font-size:12px;border-radius:20px;" id="mf-all">Todas</button>
+      <button onclick="setMyFilter('won',this)" style="height:28px;padding:0 12px;font-size:12px;border-radius:20px;" id="mf-won">Las que gané</button>
+      <button onclick="setMyFilter('lost',this)" style="height:28px;padding:0 12px;font-size:12px;border-radius:20px;" id="mf-lost">Las que perdí</button>
+      <button onclick="setMyFilter('open',this)" style="height:28px;padding:0 12px;font-size:12px;border-radius:20px;" id="mf-open">Esperando resultado</button>
+      <button onclick="if(confirm('¿Seguro que quieres borrar todas tus apuestas guardadas? Esto no se puede deshacer.')){myBets=[];mySave();myRender();}" style="height:28px;padding:0 12px;font-size:12px;border-radius:20px;color:var(--rd);border-color:var(--rbr);margin-left:auto;">Borrar todo</button>
     </div>
     <div id="my-hist-list"></div>
   </div>
 </div>
 </div>
 
-<footer>© 2026 PicksMundial · Datos: martj42/international_results + openfootball/worldcup.json · Solo informativo · +18</footer>
+<footer>© 2026 GuessBet · Datos: martj42/international_results + openfootball/worldcup.json · Solo informativo · +18</footer>
 
 <script>
 
@@ -557,11 +747,10 @@ function buildTopStrip(){
     h+='<div style="display:flex;align-items:center;gap:10px;padding:7px 0;'+(i<top.length-1?'border-bottom:1px solid var(--b);':'')+'">';
     h+='<div style="flex:1;min-width:0;">';
     h+='<div style="font-size:13px;font-weight:500;">'+pk.match+'</div>';
-    h+='<div style="font-size:11px;color:var(--mu);">'+pk.time+' · xG '+pk.xgH.toFixed(2)+'-'+pk.xgA.toFixed(2)+'</div>';
+    h+='<div style="font-size:11px;color:var(--mu);">'+pk.time+'</div>';
     h+='</div>';
     h+='<span style="font-size:12px;color:var(--mu);flex-shrink:0;">'+pk.pick+'</span>';
-    h+='<span style="font-family:\'Space Grotesk\',sans-serif;font-size:14px;font-weight:700;color:var(--bl);">'+pk.fair.toFixed(2)+'</span>';
-    h+='<span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;background:'+(hi?'var(--gdim)':'var(--adim)')+';border:1px solid '+(hi?'var(--gbr)':'var(--abr)')+';color:'+(hi?'var(--gn)':'var(--am)')+';">'+(pk.prob*100).toFixed(0)+'%</span>';
+    h+='<span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;background:'+(hi?'var(--gdim)':'var(--adim)')+';border:1px solid '+(hi?'var(--gbr)':'var(--abr)')+';color:'+(hi?'var(--gn)':'var(--am)')+';">'+(pk.prob*100).toFixed(0)+'% probable</span>';
     h+='</div>';
   });
   el.innerHTML=h;
@@ -585,7 +774,7 @@ function buildMatches(){
         const bp=bestPick(m.h,m.a,p);
         pickLabel=bp.label;pickProb=bp.prob;fairOdd=1/bp.prob;
       }
-      const src=MODEL[m.h]&&MODEL[m.a]?(hasH2H?'📡+H2H':'📡 datos reales'):'📊 ELO';
+      const src=MODEL[m.h]&&MODEL[m.a]?(hasH2H?'📡 con historial entre ellos':'📡 con datos reales'):'📊 estimado';
       const hi=fairOdd>=1.8;
       const bdr=!played&&pickLabel?'border-left:3px solid var(--am);border-radius:0 10px 10px 0;':'border-radius:10px;';
       h+='<div style="background:var(--sur);border:0.5px solid var(--b);'+bdr+'padding:12px 14px;margin-bottom:8px;">';
@@ -598,14 +787,13 @@ function buildMatches(){
       h+='</div><span style="font-size:11px;color:var(--mu);">'+m.t+'</span></div>';
       h+='<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">';
       if(!played&&pickLabel){
-        h+='<span style="font-size:12px;color:var(--mu);">Pick:</span>';
+        h+='<span style="font-size:12px;color:var(--mu);">Nuestra sugerencia:</span>';
         h+='<span style="font-size:12px;font-weight:500;">'+pickLabel+'</span>';
-        h+='<span style="font-family:\'Space Grotesk\',sans-serif;font-size:13px;font-weight:700;color:var(--bl);">'+fairOdd.toFixed(2)+'</span>';
-        h+='<span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;background:'+(hi?'var(--gdim)':'var(--adim)')+';border:1px solid '+(hi?'var(--gbr)':'var(--abr)')+';color:'+(hi?'var(--gn)':'var(--am)')+';">'+(pickProb*100).toFixed(0)+'%</span>';
+        h+='<span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;background:'+(hi?'var(--gdim)':'var(--adim)')+';border:1px solid '+(hi?'var(--gbr)':'var(--abr)')+';color:'+(hi?'var(--gn)':'var(--am)')+';">'+(pickProb*100).toFixed(0)+'% probable</span>';
       }else if(played){
         h+='<span style="font-size:12px;color:var(--mu2);">Finalizado</span>';
       }else{
-        h+='<span style="font-size:12px;color:var(--mu2);font-style:italic;">Probabilidades repartidas</span>';
+        h+='<span style="font-size:12px;color:var(--mu2);font-style:italic;">Está muy parejo, no tenemos una sugerencia clara</span>';
       }
       h+='<span style="font-size:10px;color:var(--bl);background:var(--bdim);border:1px solid rgba(59,130,246,.2);padding:1px 6px;border-radius:10px;margin-left:auto;">'+src+'</span>';
       h+='</div></div>';
@@ -616,49 +804,128 @@ function buildMatches(){
 }
 
 // ═══ HISTORIAL MUNDIAL ═══
+// ═══ DATOS DE RESULTADOS — genérico, listo para cualquier torneo ═══
+// Cada torneo es un objeto independiente; TOURNAMENT_RESULTS guarda el activo.
+// Para agregar otro campeonato (ej. Liga de Chile) solo se necesita un array nuevo
+// con el mismo formato {d, dateKey, h, a, gh, ga} y cambiar ACTIVE_TOURNAMENT.
+const TOURNAMENTS = {
+  wc2026: {
+    label: 'Mundial 2026',
+    eyebrow: '📊 Lo que ya pasó',
+    subtitle: 'Aquí ves los resultados reales de los partidos del Mundial 2026 que ya se jugaron.',
+    results: [
+      {d:'18 jun',dateKey:'2026-06-18',h:'Mexico',a:'South Korea',gh:1,ga:0},
+      {d:'18 jun',dateKey:'2026-06-18',h:'Czech Republic',a:'South Africa',gh:1,ga:1},
+      {d:'18 jun',dateKey:'2026-06-18',h:'Switzerland',a:'Bosnia-Herzegovina',gh:4,ga:1},
+      {d:'18 jun',dateKey:'2026-06-18',h:'Canada',a:'Qatar',gh:6,ga:0},
+      {d:'17 jun',dateKey:'2026-06-17',h:'Portugal',a:'DR Congo',gh:1,ga:1},
+      {d:'17 jun',dateKey:'2026-06-17',h:'Colombia',a:'Uzbekistan',gh:3,ga:1},
+      {d:'17 jun',dateKey:'2026-06-17',h:'England',a:'Croatia',gh:4,ga:2},
+      {d:'17 jun',dateKey:'2026-06-17',h:'Ghana',a:'Panama',gh:1,ga:0},
+      {d:'16 jun',dateKey:'2026-06-16',h:'France',a:'Senegal',gh:3,ga:1},
+      {d:'16 jun',dateKey:'2026-06-16',h:'Iraq',a:'Norway',gh:1,ga:4},
+      {d:'16 jun',dateKey:'2026-06-16',h:'Argentina',a:'Algeria',gh:3,ga:0},
+      {d:'16 jun',dateKey:'2026-06-16',h:'Austria',a:'Jordan',gh:3,ga:1},
+      {d:'15 jun',dateKey:'2026-06-15',h:'Belgium',a:'Egypt',gh:1,ga:1},
+      {d:'15 jun',dateKey:'2026-06-15',h:'Iran',a:'New Zealand',gh:2,ga:2},
+      {d:'15 jun',dateKey:'2026-06-15',h:'Spain',a:'Cape Verde',gh:0,ga:0},
+      {d:'15 jun',dateKey:'2026-06-15',h:'Saudi Arabia',a:'Uruguay',gh:1,ga:1},
+      {d:'14 jun',dateKey:'2026-06-14',h:'Germany',a:'Curacao',gh:7,ga:1},
+      {d:'14 jun',dateKey:'2026-06-14',h:"Cote d'Ivoire",a:'Ecuador',gh:1,ga:0},
+      {d:'14 jun',dateKey:'2026-06-14',h:'Netherlands',a:'Japan',gh:2,ga:2},
+      {d:'14 jun',dateKey:'2026-06-14',h:'Sweden',a:'Tunisia',gh:5,ga:1},
+      {d:'13 jun',dateKey:'2026-06-13',h:'Brazil',a:'Morocco',gh:1,ga:1},
+      {d:'13 jun',dateKey:'2026-06-13',h:'Haiti',a:'Scotland',gh:0,ga:1},
+      {d:'13 jun',dateKey:'2026-06-13',h:'Australia',a:'Turkey',gh:2,ga:0},
+      {d:'13 jun',dateKey:'2026-06-13',h:'Qatar',a:'Switzerland',gh:1,ga:1},
+      {d:'12 jun',dateKey:'2026-06-12',h:'Canada',a:'Bosnia-Herzegovina',gh:1,ga:1},
+      {d:'12 jun',dateKey:'2026-06-12',h:'USA',a:'Paraguay',gh:4,ga:1},
+      {d:'11 jun',dateKey:'2026-06-11',h:'South Korea',a:'Czech Republic',gh:2,ga:1},
+      {d:'11 jun',dateKey:'2026-06-11',h:'Mexico',a:'South Africa',gh:2,ga:0},
+    ],
+  },
+  // Espacio reservado para futuros torneos, ej:
+  // chile2026: { label:'Liga de Chile', eyebrow:'📊 Lo que ya pasó', subtitle:'...', results:[...] },
+};
+
+const ACTIVE_TOURNAMENT = 'wc2026';
+let selectedDateKey = 'all';
+
 function buildHist(){
-  const played=[
-    // Jornada 2 - 18 jun
-    {d:'18 jun',h:'Mexico',a:'South Korea',gh:1,ga:0},
-    {d:'18 jun',h:'Czech Republic',a:'South Africa',gh:1,ga:1},
-    {d:'18 jun',h:'Switzerland',a:'Bosnia-Herzegovina',gh:4,ga:1},
-    {d:'18 jun',h:'Canada',a:'Qatar',gh:6,ga:0},
-    // Jornada 1
-    {d:'17 jun',h:'Portugal',a:'DR Congo',gh:1,ga:1},
-    {d:'17 jun',h:'Colombia',a:'Uzbekistan',gh:3,ga:1},
-    {d:'17 jun',h:'England',a:'Croatia',gh:4,ga:2},
-    {d:'17 jun',h:'Ghana',a:'Panama',gh:1,ga:0},
-    {d:'16 jun',h:'France',a:'Senegal',gh:3,ga:1},
-    {d:'16 jun',h:'Iraq',a:'Norway',gh:1,ga:4},
-    {d:'16 jun',h:'Argentina',a:'Algeria',gh:3,ga:0},
-    {d:'16 jun',h:'Austria',a:'Jordan',gh:3,ga:1},
-    {d:'15 jun',h:'Belgium',a:'Egypt',gh:1,ga:1},
-    {d:'15 jun',h:'Iran',a:'New Zealand',gh:2,ga:2},
-    {d:'15 jun',h:'Spain',a:'Cape Verde',gh:0,ga:0},
-    {d:'15 jun',h:'Saudi Arabia',a:'Uruguay',gh:1,ga:1},
-    {d:'14 jun',h:'Germany',a:'Curacao',gh:7,ga:1},
-    {d:'14 jun',h:"Cote d'Ivoire",a:'Ecuador',gh:1,ga:0},
-    {d:'14 jun',h:'Netherlands',a:'Japan',gh:2,ga:2},
-    {d:'14 jun',h:'Sweden',a:'Tunisia',gh:5,ga:1},
-    {d:'13 jun',h:'Brazil',a:'Morocco',gh:1,ga:1},
-    {d:'13 jun',h:'Haiti',a:'Scotland',gh:0,ga:1},
-    {d:'13 jun',h:'Australia',a:'Turkey',gh:2,ga:0},
-    {d:'13 jun',h:'Qatar',a:'Switzerland',gh:1,ga:1},
-    {d:'12 jun',h:'Canada',a:'Bosnia-Herzegovina',gh:1,ga:1},
-    {d:'12 jun',h:'USA',a:'Paraguay',gh:4,ga:1},
-    {d:'11 jun',h:'South Korea',a:'Czech Republic',gh:2,ga:1},
-    {d:'11 jun',h:'Mexico',a:'South Africa',gh:2,ga:0},
-  ];
+  const t = TOURNAMENTS[ACTIVE_TOURNAMENT];
+  if(!t)return;
+
+  const eyebrowEl=document.getElementById('hist-eyebrow');
+  const titleEl=document.getElementById('hist-title');
+  const subEl=document.getElementById('hist-subtitle');
+  if(eyebrowEl)eyebrowEl.textContent=t.eyebrow;
+  if(titleEl)titleEl.textContent='Partidos ya jugados';
+  if(subEl)subEl.textContent=t.subtitle;
+
+  buildDateScroll(t.results);
+  renderHistList(t.results);
+}
+
+function buildDateScroll(results){
+  const el=document.getElementById('date-scroll');
+  if(!el)return;
+
+  // Agrupar partidos por fecha, ordenados de más reciente a más antigua
+  const byDate={};
+  results.forEach(m=>{
+    if(!byDate[m.dateKey])byDate[m.dateKey]={d:m.d,count:0};
+    byDate[m.dateKey].count++;
+  });
+  const dateKeys=Object.keys(byDate).sort((a,b)=>b.localeCompare(a));
+
+  const monthNames={'01':'ene','02':'feb','03':'mar','04':'abr','05':'may','06':'jun','07':'jul','08':'ago','09':'sep','10':'oct','11':'nov','12':'dic'};
+
+  let h='';
+  h+='<div class="date-chip'+(selectedDateKey==='all'?' active':'')+'" onclick="selectDate(\'all\')">';
+  h+='<div class="dc-day">Todo</div><div class="dc-month">'+results.length+' partidos</div>';
+  h+='</div>';
+
+  dateKeys.forEach(key=>{
+    const day=key.split('-')[2];
+    const month=monthNames[key.split('-')[1]]||'';
+    const isActive=selectedDateKey===key;
+    h+='<div class="date-chip'+(isActive?' active':'')+'" onclick="selectDate(\''+key+'\')">';
+    h+='<div class="dc-day">'+day+'</div><div class="dc-month">'+month+'</div>';
+    h+='<div class="dc-count">'+byDate[key].count+' partido'+(byDate[key].count!==1?'s':'')+'</div>';
+    h+='</div>';
+  });
+
+  el.innerHTML=h;
+}
+
+function selectDate(key){
+  selectedDateKey=key;
+  const t=TOURNAMENTS[ACTIVE_TOURNAMENT];
+  if(!t)return;
+  buildDateScroll(t.results);
+  renderHistList(t.results);
+}
+
+function renderHistList(results){
   const el=document.getElementById('hist-list');
   if(!el)return;
+
+  const filtered=selectedDateKey==='all'?results:results.filter(m=>m.dateKey===selectedDateKey);
+
+  if(!filtered.length){
+    el.innerHTML='<div style="text-align:center;padding:2.5rem 1rem;color:var(--mu);">No hay partidos para esta fecha.</div>';
+    return;
+  }
+
   let h='';
-  played.forEach(m=>{
-    h+='<div style="background:var(--sur);border:0.5px solid var(--b);border-radius:10px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;">';
-    h+='<span style="font-size:11px;color:var(--mu);min-width:40px;">'+m.d+'</span>';
-    h+='<span style="font-size:13px;font-weight:500;flex:1;">'+(FLAGS[m.h]||'')+' '+m.h+'</span>';
-    h+='<span style="font-family:\'Space Grotesk\',sans-serif;font-size:16px;font-weight:700;color:var(--am);background:var(--adim);border:1px solid var(--abr);padding:3px 12px;border-radius:7px;">'+m.gh+' - '+m.ga+'</span>';
-    h+='<span style="font-size:13px;font-weight:500;flex:1;text-align:right;">'+m.a+' '+(FLAGS[m.a]||'')+'</span>';
-    h+='<span style="font-size:11px;color:var(--mu2);">'+(m.gh+m.ga>2?'O2.5':'U2.5')+'</span>';
+  filtered.forEach(m=>{
+    const totalGoals=m.gh+m.ga;
+    h+='<div class="result-row">';
+    h+='<span class="rr-date">'+m.d+'</span>';
+    h+='<span class="rr-team"><span class="rr-flag">'+(FLAGS[m.h]||'🏳️')+'</span>'+m.h+'</span>';
+    h+='<span class="rr-score">'+m.gh+' - '+m.ga+'</span>';
+    h+='<span class="rr-team right">'+m.a+'<span class="rr-flag">'+(FLAGS[m.a]||'🏳️')+'</span></span>';
+    h+='<span class="rr-tag">'+(totalGoals>2?'Más de 2.5':'Menos de 2.5')+'</span>';
     h+='</div>';
   });
   el.innerHTML=h;
@@ -694,11 +961,11 @@ function onFC(){
     document.getElementById('la').textContent=m.a+' (2)';
     document.getElementById('l1').textContent=m.h+' (1)';
     document.getElementById('l2').textContent=m.a+' (2)';
-    const ldnbh=document.getElementById('lbl-dnbh'); if(ldnbh)ldnbh.textContent='DNB: Gana '+m.h;
-    const ldnba=document.getElementById('lbl-dnba'); if(ldnba)ldnba.textContent='DNB: Gana '+m.a;
-    const ldc1x=document.getElementById('lbl-dc1x'); if(ldc1x)ldc1x.textContent='DO: '+m.h+'/Empate';
-    const ldcx2=document.getElementById('lbl-dcx2'); if(ldcx2)ldcx2.textContent='DO: Empate/'+m.a;
-    const ldc12=document.getElementById('lbl-dc12'); if(ldc12)ldc12.textContent='DO: '+m.h+'/'+m.a;
+    const ldnbh=document.getElementById('lbl-dnbh'); if(ldnbh)ldnbh.textContent='Gana '+m.h+' (sin contar empate)';
+    const ldnba=document.getElementById('lbl-dnba'); if(ldnba)ldnba.textContent='Gana '+m.a+' (sin contar empate)';
+    const ldc1x=document.getElementById('lbl-dc1x'); if(ldc1x)ldc1x.textContent='Gana '+m.h+' o empatan';
+    const ldcx2=document.getElementById('lbl-dcx2'); if(ldcx2)ldcx2.textContent='Empatan o gana '+m.a;
+    const ldc12=document.getElementById('lbl-dc12'); if(ldc12)ldc12.textContent='Gana '+m.h+' o gana '+m.a+' (no hay empate)';
     ['obn','odnbh','odnba','odc1x','odcx2','odc12'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
     const llh=document.getElementById('live-lbl-h'); if(llh)llh.textContent='Goles '+m.h;
     const lla=document.getElementById('live-lbl-a'); if(lla)lla.textContent='Goles '+m.a;
@@ -985,14 +1252,14 @@ function runCalc(){
     document.getElementById('slbl').textContent=neutral?'Sede neutral':'Con ventaja local';
   }
 
-  const srcLabel=wcH&&wcA?'<span style="color:var(--gn)">📡 Datos WC reales</span>'
-    :wcH||wcA?'<span style="color:var(--am)">📡 Híbrido WC+histórico</span>'
-    :'<span style="color:var(--mu)">📊 20 años · ajustado por ELO rival</span>';
+  const srcLabel=wcH&&wcA?'<span style="color:var(--gn)">📡 Usa resultados reales de este Mundial</span>'
+    :wcH||wcA?'<span style="color:var(--am)">📡 Mezcla resultados de este Mundial con historia previa</span>'
+    :'<span style="color:var(--mu)">📊 Basado en 20 años de partidos anteriores</span>';
   document.getElementById('dsrc').innerHTML=srcLabel;
   // Update xG sub-labels
   const xgLblH=document.getElementById('xg-label-h');
   const xgLblA=document.getElementById('xg-label-a');
-  if(xgLblH)xgLblH.textContent=live?'xG restantes':'xG esperados';
+  if(xgLblH)xgLblH.textContent=live?'goles que le faltan por marcar':'goles que se espera que marque';
   if(xgLblA)xgLblA.textContent=live?'xG restantes':'xG esperados';
   const thModelo=document.getElementById('th-modelo');
   if(thModelo)thModelo.textContent=live?'Prob. restante':'Modelo';
@@ -1001,37 +1268,37 @@ function runCalc(){
   const srcLbl=(t,wc,m)=>wc&&wc.pj>=3?'datos WC reales ('+wc.pj+'P)':wc&&wc.pj>0?'blend WC+hist':m?'histórico 20a ('+m.pj+'P)':'ELO';
   const defQ=(ga)=>ga>1.1?'débil':ga>0.85?'media':'sólida';
   function teamBox(t,wc,m,xgFin){
-    const att=m?m.avgGF.toFixed(3):'—';
-    const def=m?m.avgGA.toFixed(3)+' (def. '+defQ(m.avgGA)+')':'—';
-    const elo=m?m.elo||1500:1500;
+    const att=m?m.avgGF.toFixed(2):'—';
+    const def=m?m.avgGA.toFixed(2)+' (defensa '+defQ(m.avgGA)+')':'—';
+    const nivel=m?m.elo||1500:1500;
     const wr=m?(m.winRate*100).toFixed(0)+'%':'—';
     let box='<div style="background:var(--sur);border:0.5px solid var(--b);border-radius:8px;padding:10px 12px;">';
     box+='<div style="font-weight:500;margin-bottom:6px;">'+t+'</div>';
-    box+='<div style="font-size:11px;color:var(--mu);">Fuente: '+srcLbl(t,wc,m)+'</div>';
-    box+='<div style="font-size:11px;color:var(--mu);">ELO: <strong style="color:var(--bl);">'+elo+'</strong></div>';
-    box+='<div style="font-size:11px;color:var(--mu);">Ataque (GF/pj adj): '+att+'</div>';
-    box+='<div style="font-size:11px;color:var(--mu);">Defensa (GA/pj adj): '+def+'</div>';
-    box+='<div style="font-size:11px;color:var(--mu);">Win rate hist: '+wr+'</div>';
-    box+='<div style="font-size:12px;font-weight:500;color:var(--bl);margin-top:6px;">xG esperados: '+(typeof xgFin==='number'?xgFin.toFixed(2):'—')+'</div>';
+    box+='<div style="font-size:11px;color:var(--mu);">Datos usados: '+srcLbl(t,wc,m)+'</div>';
+    box+='<div style="font-size:11px;color:var(--mu);">Nivel del equipo: <strong style="color:var(--bl);">'+nivel+'</strong> <span title="Número que resume qué tan fuerte es el equipo según sus resultados históricos. Mientras más alto, mejor.">ⓘ</span></div>';
+    box+='<div style="font-size:11px;color:var(--mu);">Goles que suele anotar por partido: '+att+'</div>';
+    box+='<div style="font-size:11px;color:var(--mu);">Goles que suele recibir por partido: '+def+'</div>';
+    box+='<div style="font-size:11px;color:var(--mu);">Partidos ganados (histórico): '+wr+'</div>';
+    box+='<div style="font-size:12px;font-weight:500;color:var(--bl);margin-top:6px;">Goles que se espera que marque hoy: '+(typeof xgFin==='number'?xgFin.toFixed(2):'—')+'</div>';
     box+='</div>';
     return box;
   }
-  const h2hExpl=hd&&hd.data&&hd.data.n>=3?'H2H ('+hd.data.n+'P): ajusta xG ±15%':'Sin H2H suficiente (<3P)';
+  const h2hExpl=hd&&hd.data&&hd.data.n>=3?'Se tomó en cuenta que estos equipos ya se enfrentaron '+hd.data.n+' veces antes':'No hay suficientes partidos anteriores entre estos dos equipos para tomarlos en cuenta';
   const eloFav=p.eloH>p.eloA?home:away;
   let expl='<div style="background:var(--sur2);border:1px solid var(--b2);border-radius:10px;padding:14px 16px;margin-bottom:1rem;font-size:12px;line-height:1.9;">';
-  expl+='<div style="font-size:11px;font-weight:600;color:var(--am);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">🔍 Por qué el modelo da estos números</div>';
+  expl+='<div style="font-size:11px;font-weight:600;color:var(--am);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">🔍 Por qué el modelo piensa esto</div>';
   expl+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px;">';
   expl+=teamBox(home,wcH,mH,p.xgH);
   expl+=teamBox(away,wcA,mA,p.xgA);
   expl+='</div>';
   expl+='<div style="border-top:0.5px solid var(--b);padding-top:8px;color:var(--mu);">';
-  expl+='<div><strong style="color:var(--tx);">Modelo:</strong> Poisson (50%) + ELO directo (50%). Favorito ELO: <strong style="color:var(--bl);">'+eloFav+'</strong> ('+p.eloH+' vs '+p.eloA+')</div>';
-  expl+='<div><strong style="color:var(--tx);">Ajuste H2H:</strong> '+h2hExpl+'</div>';
+  expl+='<div>Según el nivel histórico de cada equipo, el favorito es <strong style="color:var(--bl);">'+eloFav+'</strong>.</div>';
+  expl+='<div style="margin-top:4px;">'+h2hExpl+'.</div>';
   if(live&&(lv.rh>0||lv.ra>0)){
     const redParts=[];
-    if(lv.rh>0)redParts.push(home+': -'+lv.rh+' jugador'+(lv.rh>1?'es':''));
-    if(lv.ra>0)redParts.push(away+': -'+lv.ra+' jugador'+(lv.ra>1?'es':''));
-    expl+='<div style="color:var(--rd);margin-top:4px;">🟥 <strong style="color:var(--rd);">Expulsiones activas:</strong> '+redParts.join(' · ')+'. xG ajustado: ataque propio reducido, vulnerabilidad defensiva aumentada.</div>';
+    if(lv.rh>0)redParts.push(home+' juega con '+lv.rh+' jugador'+(lv.rh>1?'es':'')+' menos');
+    if(lv.ra>0)redParts.push(away+' juega con '+lv.ra+' jugador'+(lv.ra>1?'es':'')+' menos');
+    expl+='<div style="color:var(--rd);margin-top:4px;">🟥 <strong style="color:var(--rd);">Jugadores expulsados:</strong> '+redParts.join(' · ')+'. Esto se tomó en cuenta: el equipo con menos jugadores ataca menos y le hacen más goles.</div>';
   }
   expl+='</div></div>';
   document.getElementById('explanation').innerHTML=expl;
@@ -1071,11 +1338,11 @@ function runCalc(){
     mtb+='<tr>';
     mtb+='<td><input type="checkbox" class="bb-check" data-idx="'+idx+'" onchange="updateBetBuilder()" style="width:15px;height:15px;accent-color:var(--gn);cursor:pointer;"/></td>';
     mtb+='<td style="font-weight:500;">'+m.label+'</td>';
-    mtb+='<td title="'+(live?'Probabilidad restante':'Probabilidad del modelo')+'">'+(m.modelP*100).toFixed(1)+'%</td>';
+    mtb+='<td title="'+(live?'Qué tan probable es esto desde ahora':'Qué tan probable cree el modelo que es esto')+'">'+(m.modelP*100).toFixed(1)+'%</td>';
     mtb+='<td>'+(m.odd?((1/m.odd)*100).toFixed(1)+'%':'—')+'</td>';
     mtb+='<td class="'+e.cls+'">'+e.txt+'</td>';
     mtb+='<td class="fo">'+fairOdd+'</td>';
-    mtb+='<td>'+(e.ev!==null&&e.ev>5?'<span class="py">Pick ✓</span>':m.odd?'<span class="ps">Saltar</span>':'')+'</td>';
+    mtb+='<td>'+(e.ev!==null&&e.ev>5?'<span class="py">Conviene ✓</span>':m.odd?'<span class="ps">No conviene</span>':'')+'</td>';
     mtb+='</tr>';
   });
   document.getElementById('mtb').innerHTML=mtb;
@@ -1086,14 +1353,14 @@ function runCalc(){
   if(live){
     const timeRem=Math.max(0,90-lv.min);
     const sc=lv.gh+'-'+lv.ga;
-    enoteText='⚡ EN VIVO Min '+lv.min+' ('+sc+') · '+timeRem+'min restantes · '
-      +(hasOdds?(bestEV>5?'EV +'+bestEV.toFixed(1)+'% detectado — valor positivo aún disponible'
-        :'Modelo ajustado al partido en curso')
-        :'Sin cuotas — agrega las de Coolbet para ver el EDGE en vivo');
+    enoteText='⚡ Partido en vivo: minuto '+lv.min+', van '+sc+'. Quedan unos '+timeRem+' minutos · '
+      +(hasOdds?(bestEV>5?'¡Encontramos una apuesta con buen valor ahora mismo!'
+        :'Los números ya están actualizados con el minuto y marcador actuales')
+        :'Escribe las cuotas arriba para saber si conviene apostar');
   } else {
-    enoteText=!hasOdds?'Sin cuotas — agrega las de Coolbet para ver el EDGE real.'
-      :bestEV>5?'EV máximo: +'+bestEV.toFixed(1)+'%. Picks marcados tienen valor positivo.'
-      :'Modelo y mercado alineados (±3%). No fuerces el pick.';
+    enoteText=!hasOdds?'Escribe al menos una cuota arriba para que te digamos si conviene apostar.'
+      :bestEV>5?'¡Buena noticia! Encontramos al menos una apuesta donde el modelo cree que tienes ventaja.'
+      :'El modelo y la cuota están bastante de acuerdo. No hay una ventaja clara para apostar aquí.';
   }
   const enoteEl=document.getElementById('enote');
   enoteEl.textContent=enoteText;
@@ -1154,10 +1421,10 @@ function myPreview(){
   const stake=parseFloat(document.getElementById('bf-stake').value);
   const ev=parseFloat(document.getElementById('bf-ev').value);
   const el=document.getElementById('my-preview');
-  if(!odds||!stake||odds<1.01){el.textContent='Ingresa cuota y stake para ver el retorno potencial.';el.style.color='var(--mu)';return;}
+  if(!odds||!stake||odds<1.01){el.textContent='Escribe la cuota y cuánto apostaste para ver cuánto podrías ganar.';el.style.color='var(--mu)';return;}
   const win=((odds-1)*stake).toFixed(2);
-  let txt='Si gana → +'+win+'u neto | ROI: +'+(((odds-1)*100).toFixed(0))+'%';
-  if(!isNaN(ev))txt+=' | EV modelo: '+(ev>=0?'+':'')+ev.toFixed(1)+'%';
+  let txt='Si ganas, te llevas '+win+' de ganancia (además de recuperar lo que apostaste)';
+  if(!isNaN(ev))txt+=' · Ventaja calculada: '+(ev>=0?'+':'')+ev.toFixed(1)+'%';
   el.textContent=txt;
   el.style.color=(!isNaN(ev)&&ev>0)?'var(--gn)':(!isNaN(ev)&&ev<0)?'var(--rd)':'var(--tx)';
 }
@@ -1185,7 +1452,7 @@ function addMyBet(){
 }
 
 function exportMyBets(){
-  if(!myBets.length){alert('No tienes apuestas registradas para exportar.');return;}
+  if(!myBets.length){alert('Todavía no has anotado ninguna apuesta, así que no hay nada que guardar.');return;}
   const dataStr=JSON.stringify(myBets,null,2);
   const blob=new Blob([dataStr],{type:'application/json'});
   const url=URL.createObjectURL(blob);
@@ -1206,17 +1473,17 @@ function importMyBets(event){
   reader.onload=function(e){
     try{
       const imported=JSON.parse(e.target.result);
-      if(!Array.isArray(imported)){alert('Archivo inválido.');event.target.value='';return;}
+      if(!Array.isArray(imported)){alert('Este archivo no se puede usar. Asegúrate de subir un archivo que hayas guardado antes desde esta misma app.');event.target.value='';return;}
       const currentCount=myBets.length;
       const newCount=imported.length;
-      const confirmMsg='Esto va a REEMPLAZAR tu historial actual ('+currentCount+' apuesta'+(currentCount!==1?'s':'')+') con el contenido del archivo ('+newCount+' apuesta'+(newCount!==1?'s':'')+').\n\nEsta acción no se puede deshacer. ¿Continuar?';
+      const confirmMsg='Vas a reemplazar lo que tienes ahora ('+currentCount+' apuesta'+(currentCount!==1?'s':'')+') con lo que hay en el archivo ('+newCount+' apuesta'+(newCount!==1?'s':'')+').\n\nNo podrás deshacer esto. ¿Quieres continuar?';
       if(!confirm(confirmMsg)){event.target.value='';return;}
       myBets=imported.slice().sort((a,b)=>b.id-a.id);
       mySave();
       myRender();
-      alert('✓ Historial reemplazado: ahora tienes '+myBets.length+' apuesta'+(myBets.length!==1?'s':'')+'.');
+      alert('✓ Listo, ahora tienes '+myBets.length+' apuesta'+(myBets.length!==1?'s':'')+' guardada'+(myBets.length!==1?'s':'')+'.');
     }catch(err){
-      alert('Error al leer el archivo: '+err.message);
+      alert('No pudimos leer este archivo. Asegúrate de que sea un archivo guardado desde esta misma app.');
     }
   };
   reader.readAsText(file);
@@ -1248,25 +1515,25 @@ function myFmt(d){try{return new Date(d+'T12:00:00').toLocaleDateString('es-CL',
 
 function myBetCard(b){
   const potWin=((b.odds-1)*b.stake).toFixed(2);
-  const plTxt=b.result==='open'?'Pot: +'+potWin+'u':(b.pl>=0?'+':'')+b.pl.toFixed(2)+'u';
+  const plTxt=b.result==='open'?'Podrías ganar +'+potWin:(b.pl>=0?'Ganaste +':'Perdiste ')+Math.abs(b.pl).toFixed(2);
   const bc=b.result==='won'?'var(--gn)':b.result==='lost'?'var(--rd)':'var(--am)';
-  const rl=b.result==='won'?'✓ Ganada':b.result==='lost'?'✗ Perdida':'⏳ Abierta';
+  const rl=b.result==='won'?'✓ Ganaste':b.result==='lost'?'✗ Perdiste':'⏳ Esperando';
   let c='<div style="background:var(--sur);border:0.5px solid var(--b);border-left:3px solid '+bc+';border-radius:0 10px 10px 0;padding:12px 14px;margin-bottom:8px;">';
   c+='<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px;">';
   c+='<div><div style="font-size:14px;font-weight:500;">'+b.match+'</div>';
   c+='<div style="font-size:11px;color:var(--mu);margin-top:2px;">'+b.comp+' · '+myFmt(b.date)+' · '+b.bookie+'</div></div>';
   c+='<div style="display:flex;gap:5px;flex-shrink:0;">';
   if(b.result==='open'){
-    c+='<button onclick="mySetResult('+b.id+',\'won\')" style="height:26px;padding:0 8px;font-size:11px;border-radius:6px;border:1px solid rgba(34,197,94,.4);background:rgba(34,197,94,.1);color:var(--gn);cursor:pointer;">✓</button>';
-    c+='<button onclick="mySetResult('+b.id+',\'lost\')" style="height:26px;padding:0 8px;font-size:11px;border-radius:6px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.1);color:var(--rd);cursor:pointer;">✗</button>';
+    c+='<button onclick="mySetResult('+b.id+',\'won\')" title="Marcar como ganada" style="height:26px;padding:0 8px;font-size:11px;border-radius:6px;border:1px solid rgba(34,197,94,.4);background:rgba(34,197,94,.1);color:var(--gn);cursor:pointer;">✓ Gané</button>';
+    c+='<button onclick="mySetResult('+b.id+',\'lost\')" title="Marcar como perdida" style="height:26px;padding:0 8px;font-size:11px;border-radius:6px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.1);color:var(--rd);cursor:pointer;">✗ Perdí</button>';
   }
-  c+='<button onclick="myDelete('+b.id+')" style="height:26px;padding:0 8px;font-size:11px;border-radius:6px;border:0.5px solid var(--b2);background:transparent;color:var(--mu);cursor:pointer;">🗑</button>';
+  c+='<button onclick="myDelete('+b.id+')" title="Eliminar esta apuesta" style="height:26px;padding:0 8px;font-size:11px;border-radius:6px;border:0.5px solid var(--b2);background:transparent;color:var(--mu);cursor:pointer;">🗑</button>';
   c+='</div></div>';
   c+='<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">';
   c+='<span style="font-size:13px;font-weight:500;">'+b.pick+'</span>';
-  c+='<span style="font-family:\'Space Grotesk\',sans-serif;font-size:13px;font-weight:600;color:var(--bl);">@ '+b.odds.toFixed(2)+'</span>';
-  c+='<span style="font-size:12px;color:var(--mu);">Stake: '+b.stake+'u</span>';
-  if(b.ev!==null)c+='<span style="font-size:11px;color:'+(b.ev>=0?'var(--gn)':'var(--rd)')+';">EV '+(b.ev>=0?'+':'')+b.ev+'%</span>';
+  c+='<span style="font-family:\'Space Grotesk\',sans-serif;font-size:13px;font-weight:600;color:var(--bl);" title="Cuota">@ '+b.odds.toFixed(2)+'</span>';
+  c+='<span style="font-size:12px;color:var(--mu);">Apostaste: '+b.stake+'</span>';
+  if(b.ev!==null)c+='<span style="font-size:11px;color:'+(b.ev>=0?'var(--gn)':'var(--rd)')+';" title="Ventaja calculada por el análisis">Ventaja: '+(b.ev>=0?'+':'')+b.ev+'%</span>';
   c+='<span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;background:'+(b.result==='won'?'var(--gdim)':b.result==='lost'?'var(--rdim)':'var(--adim)')+';color:'+bc+';">'+rl+'</span>';
   c+='<span style="font-family:\'Space Grotesk\',sans-serif;font-size:13px;font-weight:600;color:'+bc+';margin-left:auto;">'+plTxt+'</span>';
   c+='</div></div>';
@@ -1287,25 +1554,25 @@ function myRender(){
   wrEl.textContent=wr!==null?wr.toFixed(1)+'%':'—';
   wrEl.style.color=wr>=50?'var(--gn)':wr!==null?'var(--rd)':'var(--am)';
   const plEl=document.getElementById('ms-pl');
-  plEl.textContent=closed.length?(totalPL>=0?'+':'')+totalPL.toFixed(2)+'u':'—';
+  plEl.textContent=closed.length?(totalPL>=0?'+':'')+totalPL.toFixed(2):'—';
   plEl.style.color=totalPL>0?'var(--gn)':totalPL<0?'var(--rd)':'var(--tx)';
   const roiEl=document.getElementById('ms-roi');
   roiEl.textContent=closed.length?(roi>=0?'+':'')+roi.toFixed(1)+'%':'—';
   roiEl.style.color=roi>0?'var(--gn)':roi<0?'var(--rd)':'var(--tx)';
   const hWr=document.getElementById('h-wr');const hPl=document.getElementById('h-pl');
   if(hWr)hWr.textContent=wr!==null?wr.toFixed(1)+'%':'—';
-  if(hPl){hPl.textContent=closed.length?(totalPL>=0?'+':'')+totalPL.toFixed(2)+'u':'—';hPl.style.color=totalPL>=0?'var(--gn)':'var(--rd)';}
+  if(hPl){hPl.textContent=closed.length?(totalPL>=0?'+':'')+totalPL.toFixed(2):'—';hPl.style.color=totalPL>=0?'var(--gn)':'var(--rd)';}
   const badge=document.getElementById('open-badge');
   if(badge){badge.textContent=open.length;badge.style.display=open.length?'inline':'none';}
-  const ol=document.getElementById('open-label');if(ol)ol.textContent='Apuestas pendientes ('+open.length+')';
+  const ol=document.getElementById('open-label');if(ol)ol.textContent='Apuestas esperando resultado ('+open.length+')';
   const openList=document.getElementById('my-open-list');
-  if(openList)openList.innerHTML=open.length?open.map(myBetCard).join(''):'<div style="text-align:center;padding:3rem 1rem;color:var(--mu);">✓ Sin apuestas abiertas</div>';
+  if(openList)openList.innerHTML=open.length?open.map(myBetCard).join(''):'<div style="text-align:center;padding:3rem 1rem;color:var(--mu);">✓ No tienes apuestas esperando resultado</div>';
   let filtered=myBets;
   if(myFilter==='won')filtered=won;
   else if(myFilter==='lost')filtered=myBets.filter(b=>b.result==='lost');
   else if(myFilter==='open')filtered=open;
   const histList=document.getElementById('my-hist-list');
-  if(histList)histList.innerHTML=filtered.length?filtered.map(myBetCard).join(''):'<div style="text-align:center;padding:3rem 1rem;color:var(--mu);">Sin apuestas. Registra tu primera en "+ Nueva".</div>';
+  if(histList)histList.innerHTML=filtered.length?filtered.map(myBetCard).join(''):'<div style="text-align:center;padding:3rem 1rem;color:var(--mu);">Todavía no has anotado ninguna apuesta. Usa el botón "+ Anotar nueva apuesta".</div>';
 }
 
 function myRenderChart(){
@@ -1372,43 +1639,40 @@ function buildCombinadas(){
   }));
 
   if(candidates.length<2){
-    el.innerHTML='<div class="card" style="text-align:center;color:var(--mu);font-size:13px;padding:1.5rem;">No hay suficientes partidos próximos con picks confiables para armar una combinada ahora mismo.</div>';
+    el.innerHTML='<div class="card" style="text-align:center;color:var(--mu);font-size:13px;padding:1.5rem;">Por ahora no hay suficientes partidos próximos en los que confiemos para sugerir una combinada.</div>';
     return;
   }
 
   candidates.sort((a,b)=>b.prob-a.prob);
 
   function buildCombo(legs,label,badgeColor){
-    let combOdd=1, combProb=1;
-    legs.forEach(l=>{combOdd*=l.odd; combProb*=l.prob;});
-    const ev=((combProb*combOdd-1)*100);
+    let combProb=1;
+    legs.forEach(l=>{combProb*=l.prob;});
     let h='<div class="cc">';
     h+='<div><div class="ccb" style="background:'+badgeColor+';">'+label+'</div>';
-    h+='<div class="ccp">'+legs.length+' selecciones · próximos partidos sin jugar</div></div>';
-    h+='<div class="cco">'+combOdd.toFixed(2)+'</div>';
-    h+='<div class="ccl">';
+    h+='<div class="ccp">'+legs.length+' apuestas juntas · de partidos que aún no se juegan</div></div>';
+    h+='<div class="ccl" style="margin-top:8px;">';
     legs.forEach((l,i)=>{
       h+='<div class="cleg"><span class="leg-n">'+(i+1)+'/'+legs.length+'</span>';
-      h+='<div class="lc"><div class="lm">'+l.match+' · '+l.time+'</div><div class="lp">'+l.pick+'</div></div>';
-      h+='<span class="leg-o">'+l.odd.toFixed(2)+'</span></div>';
+      h+='<div class="lc"><div class="lm">'+l.match+' · '+l.time+'</div><div class="lp">'+l.pick+'</div></div></div>';
     });
     h+='</div>';
-    h+='<div class="ccf"><div class="cs"><div class="cl">Prob. comb.</div><div class="cv" style="color:var(--bl);">'+(combProb*100).toFixed(0)+'%</div></div>';
-    h+='<div class="cs"><div class="cl">EV comb.</div><div class="cv" style="color:'+(ev>0?'var(--gn)':'var(--rd)')+';">'+(ev>=0?'+':'')+ev.toFixed(0)+'%</div></div></div>';
+    h+='<div class="ccf"><div class="cs"><div class="cl">Probabilidad de que se cumplan todas</div><div class="cv" style="color:var(--bl);">'+(combProb*100).toFixed(0)+'%</div></div></div>';
+    h+='<div style="font-size:11px;color:var(--mu);margin-top:8px;">Ve a "Analizar un partido" e ingresa las cuotas reales de tu casa de apuestas para armar esta combinada con el premio exacto.</div>';
     h+='</div>';
     return h;
   }
 
   let html='';
-  // Combinada Segura: top 2 most confident picks
+  // Combinación más segura: las 2 apuestas más probables
   if(candidates.length>=2){
-    html+=buildCombo(candidates.slice(0,2),'Combinada Segura','var(--gdim)');
+    html+=buildCombo(candidates.slice(0,2),'La más segura','var(--gdim)');
   }
-  // Combinada Valor: next 2 best (different matches)
+  // Combinación alternativa: las siguientes 2 mejores (de otros partidos)
   const used=new Set(candidates.slice(0,2).map(c=>c.match));
   const rest=candidates.filter(c=>!used.has(c.match));
   if(rest.length>=2){
-    html+=buildCombo(rest.slice(0,2),'Combinada Valor','var(--adim)');
+    html+=buildCombo(rest.slice(0,2),'Otra opción','var(--adim)');
   }
   el.innerHTML=html;
 }
