@@ -2,8 +2,17 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,viewport-fit=cover"/>
 <title>GuessBet · Mundial 2026</title>
+<meta name="description" content="Predicciones del Mundial 2026 con modelo estadístico y registro de apuestas."/>
+<meta name="theme-color" content="#0a1410"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="GuessBet"/>
+<link rel="manifest" href="manifest.json"/>
+<link rel="apple-touch-icon" href="icon-192.png"/>
+<link rel="icon" type="image/png" href="icon-192.png"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
@@ -228,11 +237,51 @@ optgroup{color:var(--am);}option{background:var(--sur);color:var(--tx);}
 footer{border-top:1px solid var(--b2);padding:24px;text-align:center;font-size:11px;color:var(--mu2);}
 
 @media(max-width:680px){
+  body{font-size:15px;}
+  .wrap{padding:1.25rem .9rem 4rem;}
+  .ni{padding:0 .9rem;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .ni::-webkit-scrollbar{display:none;}
+  .logo{margin-right:16px;font-size:18px;}
+  .nl{padding:13px 10px;font-size:12.5px;}
   .tc{grid-template-columns:1fr;}
   .sb{grid-template-columns:repeat(2,1fr);}
   .og,.g2,.g3{grid-template-columns:1fr;}
-  .hero h1{font-size:32px;}
+  .hero h1{font-size:28px;}
+  .hero p{font-size:13px;}
+  .counters{gap:8px;}
+  .counter{min-width:80px;padding:10px 12px;}
+  .counter .cv{font-size:22px;}
   .mfl{font-size:18px;}
+  .mc{padding:12px;}
+  .mch{flex-wrap:wrap;gap:4px;}
+  .mcp{gap:6px;}
+  .card{padding:1rem;border-radius:12px;}
+  .tr2{grid-template-columns:1fr;gap:10px;}
+  .tvs{display:none;}
+  .xg-strip{padding:13px 14px;gap:14px;}
+  .xgt .xv{font-size:24px;}
+  .mt{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap;}
+  .mt th,.mt td{padding:8px 8px;font-size:12.5px;}
+  .ht{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .date-chip{min-width:56px;padding:8px 12px;}
+  .result-row{flex-wrap:wrap;padding:11px 12px;gap:8px;}
+  .result-row .rr-team{font-size:12.5px;min-width:0;}
+  .result-row .rr-score{order:3;flex-basis:100%;text-align:center;margin-top:4px;}
+  .btn-am,.cb{height:48px;font-size:16px;}
+  input,select{height:44px;font-size:16px;}
+  .fg label{font-size:12px;}
+  .tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .tabs::-webkit-scrollbar{display:none;}
+  .tab{padding:7px 13px 10px;white-space:nowrap;}
+  .hf{gap:6px;}
+  .fg2{flex-wrap:wrap;}
+  footer{padding:18px 14px;font-size:10.5px;}
+}
+@media(max-width:380px){
+  .nl{padding:13px 7px;font-size:11.5px;}
+  .logo span{display:none;}
+  .sb{grid-template-columns:1fr 1fr;}
+  .counter{min-width:70px;}
 }
 </style>
 </head>
@@ -1685,6 +1734,12 @@ buildTopStrip();
 buildCombinadas();
 myRender();
 document.getElementById('bf-date').value=new Date().toISOString().split('T')[0];
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  });
+}
 
 </script>
 </body>
